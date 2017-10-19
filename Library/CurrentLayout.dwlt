@@ -13,10 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 8
     y: 50
     width: 1904
     height: 982
+=======
+    x: 0
+    y: 42
+    width: 1920
+    height: 998
+>>>>>>> vlog
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
@@ -41,8 +48,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1904
     height: 982
+=======
+    width: 1920
+    height: 998
+>>>>>>> vlog
   m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
@@ -81,8 +93,13 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 962
     width: 1904
+=======
+    y: 978
+    width: 1920
+>>>>>>> vlog
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -105,12 +122,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
     width: 1904
     height: 932
   m_MinSize: {x: 711, y: 471}
   m_MaxSize: {x: 18006, y: 14021}
   vertical: 0
   controlID: 84
+=======
+    width: 1920
+    height: 948
+  m_MinSize: {x: 711, y: 471}
+  m_MaxSize: {x: 18006, y: 14021}
+  vertical: 0
+  controlID: 138
+>>>>>>> vlog
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,12 +155,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 475
     height: 932
   m_MinSize: {x: 232, y: 471}
   m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
   controlID: 22
+=======
+    width: 479
+    height: 948
+  m_MinSize: {x: 232, y: 471}
+  m_MaxSize: {x: 10002, y: 14021}
+  vertical: 1
+  controlID: 66
+>>>>>>> vlog
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -151,8 +186,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 475
     height: 534
+=======
+    width: 479
+    height: 544
+>>>>>>> vlog
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
@@ -175,9 +215,15 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 534
     width: 475
     height: 398
+=======
+    y: 544
+    width: 479
+    height: 404
+>>>>>>> vlog
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 15}
@@ -203,12 +249,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 475
     y: 0
+<<<<<<< HEAD
     width: 939
     height: 932
   m_MinSize: {x: 204, y: 342}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
   controlID: 85
+=======
+    width: 947
+    height: 948
+  m_MinSize: {x: 204, y: 342}
+  m_MaxSize: {x: 4004, y: 8042}
+  vertical: 1
+  controlID: 10
+>>>>>>> vlog
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,8 +280,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 939
     height: 618
+=======
+    width: 947
+    height: 629
+>>>>>>> vlog
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 16}
@@ -250,9 +310,15 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 618
     width: 939
     height: 314
+=======
+    y: 629
+    width: 947
+    height: 319
+>>>>>>> vlog
   m_MinSize: {x: 104, y: 121}
   m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 17}
@@ -277,8 +343,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1414
     y: 0
+<<<<<<< HEAD
     width: 490
     height: 932
+=======
+    width: 494
+    height: 948
+>>>>>>> vlog
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
@@ -308,10 +379,17 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 485
     y: 99
     width: 935
     height: 597
+=======
+    x: 481
+    y: 91
+    width: 943
+    height: 608
+>>>>>>> vlog
   m_MaximizeOnPlay: 0
   m_Gizmos: 1
   m_Stats: 0
@@ -340,25 +418,43 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
+<<<<<<< HEAD
       width: 935
       height: 580
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 467.5, y: 290}
+=======
+      width: 943
+      height: 591
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 471.5, y: 295.5}
+>>>>>>> vlog
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
       x: -467.5
       y: -290
       width: 935
       height: 580
+=======
+      x: -471.5
+      y: -295.5
+      width: 943
+      height: 591
+>>>>>>> vlog
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
+<<<<<<< HEAD
   m_LastWindowPixelSize: {x: 935, y: 597}
+=======
+  m_LastWindowPixelSize: {x: 943, y: 608}
+>>>>>>> vlog
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
@@ -384,6 +480,7 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 8
     y: 99
     width: 473
@@ -393,20 +490,31 @@ MonoBehaviour:
     m_SelectedIDs: ce750000
     m_LastClickedID: 30158
     m_ExpandedIDs: 547ffcff5e85fcff2ebafcff42c7fcff6eddfcff7af0fcff4816fdff9c59fdffaa5afdff7ecbffff2cd5ffff70f5ffffe2fbffff000000003e2f0000482f0000502f0000123000004e300000d8300000143100002e3100006e59000078590000aa590000125e00001c5e00004e5e00003071000092750000
+=======
+    x: 0
+    y: 91
+    width: 477
+    height: 523
+  m_TreeViewState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: dcf9ffff
+    m_LastClickedID: -1572
+    m_ExpandedIDs: dcf9ffffe2fbffff00000000282e0000
+>>>>>>> vlog
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Plataforma flotan
+      m_OriginalName: Plataforma flotan
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -1572
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 7}
     m_SearchString: 
@@ -437,10 +545,17 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 8
     y: 633
     width: 473
     height: 377
+=======
+    x: 0
+    y: 635
+    width: 477
+    height: 383
+>>>>>>> vlog
   m_SearchFilter:
     m_NameFilter: 
     m_ClassNames: []
@@ -453,18 +568,31 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
+<<<<<<< HEAD
     - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Scenes
+=======
+    - Assets
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets
+>>>>>>> vlog
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\mat.aules\ES2017B3
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 16270000
     m_LastClickedID: 10006
+=======
+    m_SelectedIDs: 98260000
+    m_LastClickedID: 9880
+>>>>>>> vlog
     m_ExpandedIDs: 0000000098260000e02d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -520,7 +648,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: e82200008e2e00008a2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -570,10 +698,17 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 485
     y: 99
     width: 935
     height: 597
+=======
+    x: 481
+    y: 91
+    width: 943
+    height: 608
+>>>>>>> vlog
   m_SceneLighting: 1
   lastFramingTime: 1786.1457978038375
   m_2DMode: 1
@@ -644,10 +779,17 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 485
     y: 717
     width: 935
     height: 293
+=======
+    x: 481
+    y: 720
+    width: 943
+    height: 298
+>>>>>>> vlog
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -698,10 +840,17 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 1424
     y: 99
     width: 488
     height: 911
+=======
+    x: 1428
+    y: 91
+    width: 492
+    height: 927
+>>>>>>> vlog
   m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:

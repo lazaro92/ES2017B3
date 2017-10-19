@@ -56,7 +56,10 @@
      <Compile Include="Assets\MenuObject.cs" />
      <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Arm\ArmRotation.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\Scripts\TimingScript.cs" />
+=======
+>>>>>>> vlog
      <Compile Include="Assets\Scripts\Weapons\IWeapon.cs" />
      <Compile Include="Assets\Scripts\Weapons\Pistol.cs" />
  <Reference Include="UnityEngine.UI">
