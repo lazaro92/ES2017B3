@@ -1157,6 +1157,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1474578752582850, guid: 4cec695d96579104594465ab9cf50591, type: 2}
+      propertyPath: m_Name
+      value: Floating platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cec695d96579104594465ab9cf50591, type: 2}
   m_IsPrefabParent: 0
