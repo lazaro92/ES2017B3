@@ -57,7 +57,7 @@ public class Pistol : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
-            Debug.Log(hit.collider.name + " has been shooted with damage of " + damage); //getDamageEqualDistance(hit)
+            Debug.Log(hit.collider.name + " has been shot with damage of " + damage); //getDamageEqualDistance(hit)
         }
     }
 
