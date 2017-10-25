@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour {
 	// Doble salto
 	private bool doubleJump;
 	// Control moviment
-	private bool movement = true;
+	public bool movement = false;
+
+
 
 
 	// Use this for initialization
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Per detectar la tecla per saltar
-		if (Input.GetKeyDown(KeyCode.UpArrow))
+		if (Input.GetKeyDown(KeyCode.UpArrow) && movement)
 		{
 			// Si tocamos el suelo
 			if (grounded) {

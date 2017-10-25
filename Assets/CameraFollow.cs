@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
-
+	GameStart gameStartReference;
 	// Objecte que volem seguir en aquest cas el jugador
 	public GameObject follow;
 	// Per tallar la camara a la posició que volem
@@ -15,7 +15,8 @@ public class CameraFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		gameStartReference = GameObject.Find("initScript").GetComponent<GameStart>();
+		follow = gameStartReference.chickens[0];
 	}
 
 	// Update is called once per frame (Update es un bucle)
@@ -30,5 +31,10 @@ public class CameraFollow : MonoBehaviour {
 			Mathf.Clamp(posY,minCamPos.y, maxCamPos.x), 
 			transform.position.z);
 
+	}
+
+	
+	public void setFollower(int index){
+		follow = gameStartReference.chickens[index];
 	}
 }
