@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Per detectar la tecla per saltar
-		if (Input.GetKeyDown(KeyCode.UpArrow) && movement)
+		if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown("w")) && movement)
 		{
 			// Si tocamos el suelo
 			if (grounded) {
