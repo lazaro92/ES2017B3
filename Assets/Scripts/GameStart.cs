@@ -25,7 +25,7 @@ public class GameStart : MonoBehaviour {
 			chickens[i] = Instantiate(player, new Vector3(-7.82f + i, -3.0f, 0), Quaternion.identity);
 		}
 		playerController = chickens[0].GetComponent<PlayerController>();
-		playerController.movement = true;
+		playerController.setMovement(true);
 
 		camFollow = Camera.main.GetComponent<CameraFollow>();
 	}
@@ -33,14 +33,14 @@ public class GameStart : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.N)){
-			playerController.movement = false;
+			playerController.setMovement(false);
 
 			actualChicken++;
 			if (actualChicken >= chickenNum){
 				actualChicken = 0;
 			}
 			playerController = chickens[actualChicken].GetComponent<PlayerController>();
-			playerController.movement = true;
+			playerController.setMovement(true);
 			camFollow.setFollower(actualChicken);
 		}
 	}

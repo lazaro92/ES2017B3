@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 	// Doble salto
 	private bool doubleJump;
 	// Control moviment
-	public bool movement = false;
+	private bool movement = false;
 
 
 
@@ -112,9 +112,23 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// Torna a sortir el personatge al mateix lloc si sortim de l'escena.
+	/*
 	void OnBecameInvisible()
 	{
 		transform.position = new Vector3(-1, 0, 0);
+	}
+	*/
+
+	public void setMovement(bool movement){
+		this.movement = movement;
+
+		GameObject arm = transform.Find("Arm").gameObject;
+		ArmRotation rotation = arm.GetComponent<ArmRotation>();
+		rotation.setEnabledRotation(movement);
+
+		GameObject goPistol = transform.Find("Arm/Pistol").gameObject;
+		Pistol pistol = goPistol.GetComponent<Pistol>();
+		pistol.setEnabledShoot(movement);
 	}
 		
 }

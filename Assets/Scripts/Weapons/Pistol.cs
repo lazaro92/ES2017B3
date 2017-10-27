@@ -10,6 +10,7 @@ public class Pistol : MonoBehaviour
     public float damage = 10; //Damage is for the damage of the player that hit it.
     public LayerMask wantToHit; //Is the layers that we want to hit
 
+    private bool enabledShoot = false;
     float timeToFire = 0;
     Transform firePoint;
 
@@ -31,7 +32,7 @@ public class Pistol : MonoBehaviour
         if (fireRate == 0)
         {
             //Check if fireButton is pressed
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && enabledShoot)
             {
                 Shoot();
             }
@@ -39,7 +40,7 @@ public class Pistol : MonoBehaviour
         //If firerate is diferent than 0 we do a burst shoot
         else
         {
-            if (Input.GetButton("Fire1") & Time.time > timeToFire)
+            if (Input.GetButton("Fire1") & Time.time > timeToFire && enabledShoot)
             {
                 timeToFire = Time.time + 1 / fireRate;
                 Shoot();
@@ -71,5 +72,10 @@ public class Pistol : MonoBehaviour
         finalDamage = damage - 10 / euclidDistance;
 
         return finalDamage;
+    }
+
+    // setter for chicken
+    public void setEnabledShoot(bool enable){
+        enabledShoot = enable;
     }
 }
