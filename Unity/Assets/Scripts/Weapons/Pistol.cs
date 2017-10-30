@@ -6,8 +6,8 @@ public class Pistol : MonoBehaviour
 {
 
     //Variables
-    public float fireRate = 0; //FireRate is for how many bullets go when you press click (0 is for 1 bullet rate)
-    public float damage = 10; //Damage is for the damage of the player that hit it.
+    private float fireRate = 0; //FireRate is for how many bullets go when you press click (0 is for 1 bullet rate)
+	private int damage = Globals.PISTOL_DAMAGE; //Damage is for the damage of the player that hit it.
     public LayerMask wantToHit; //Is the layers that we want to hit
 
     private bool enabledShoot = false;
@@ -40,7 +40,7 @@ public class Pistol : MonoBehaviour
         //If firerate is diferent than 0 we do a burst shoot
         else
         {
-            if (Input.GetButton("Fire1") & Time.time > timeToFire && enabledShoot)
+            if (Input.GetButtonDown("Fire1") & Time.time > timeToFire && enabledShoot)
             {
                 timeToFire = Time.time + 1 / fireRate;
                 Shoot();
@@ -58,20 +58,25 @@ public class Pistol : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
-            Debug.Log(hit.collider.name + " has been shot with damage of " + damage); //getDamageEqualDistance(hit)
+			Debug.Log(hit.collider.name + " has been shot with damage of " + getDamageEqualDistance(hit)); //getDamageEqualDistance(hit)
+			if (hit.collider.name == "Player(Clone)") {
+				GameObject hitPlayer = hit.transform.gameObject;
+				PlayerController player = hitPlayer.GetComponent<PlayerController> ();
+				player.decreaseHealth (getDamageEqualDistance(hit));
+			}
         }
     }
 
     //Function to define less damage when distance is longer.
-    float getDamageEqualDistance(RaycastHit2D hit)
+    int getDamageEqualDistance(RaycastHit2D hit)
     {
         float finalDamage;
 
         float euclidDistance = Mathf.Sqrt(Mathf.Pow(firePoint.position.x - hit.point.x, 2.0f) + Mathf.Pow(firePoint.position.y - hit.point.y, 2.0f));
-        Debug.Log(euclidDistance);
-        finalDamage = damage - 10 / euclidDistance;
+        //Debug.Log(euclidDistance);
+		finalDamage = damage - 0.07f * euclidDistance;
 
-        return finalDamage;
+		return (int) finalDamage;
     }
 
     // setter for chicken

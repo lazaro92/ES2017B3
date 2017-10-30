@@ -6,6 +6,7 @@ public class Globals : MonoBehaviour {
 
 	//CONSTANST
 	public const int HEALTHVALUE = 100;//change if needed
+	public const int PISTOL_DAMAGE = 50;
 
 	//STATIC
 	public static int numChickens = 0; //initial chickens to gameplay

@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour {
 	private bool doubleJump;
 	// Control moviment
 	private bool movement = false;
+	// Health
+	private int health = Globals.HEALTHVALUE;
+
+	Transform playerGraphics; //Reference to the graphics, so we can change the direction
 
 
 
@@ -32,6 +36,14 @@ public class PlayerController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 		// Obtenim el component animador
 		anim = GetComponent<Animator>();
+		//Get player
+		playerGraphics = transform.FindChild("Player");
+
+		if (playerGraphics == null)
+		{
+			Debug.LogError("There is no child in Graphics");
+		}
+
 	}
 
 	// Problemes amb fisiques
@@ -92,13 +104,13 @@ public class PlayerController : MonoBehaviour {
 		if (h > 0.1f)
 		{
 			// Assignem nou vector
-			transform.localScale = new Vector3(1f, 1f, 1f);
+			playerGraphics.localScale = new Vector3(1f, 1f, 1f);
 		}
 
 		// Vamos a la izq. i girem el personatge mirem la izq.
 		if (h < -0.1f)
 		{
-			transform.localScale = new Vector3(-1f, 1f, 1f);
+			playerGraphics.localScale = new Vector3(-1f, 1f, 1f);
 		}
 			
 		if (jump)
@@ -129,6 +141,21 @@ public class PlayerController : MonoBehaviour {
 		GameObject goPistol = transform.Find("Arm/Pistol").gameObject;
 		Pistol pistol = goPistol.GetComponent<Pistol>();
 		pistol.setEnabledShoot(movement);
+	}
+
+	/*
+ +	* Decrease health of the player
+ +	*/
+	public void decreaseHealth(int health){
+		if (this.health > health) {
+			this.health = this.health - health;
+		} else {
+			this.health = 0;
+			//GameObject startObject = transform.Find("initScript").gameObject;
+			//GameStart start = startObject.GetComponent<GameStart>();
+			//start.chickens.Remove (this.gameObject);
+			Destroy (this.gameObject);
+		}
 	}
 		
 }

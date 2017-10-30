@@ -990,9 +990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402db710edc9c4c42b985e33724ea156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1812544697555482, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
   chickens: []
-  player: {fileID: 1626841402354944, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
-  actualPlayer: 0
+  actualChicken: 0
 --- !u!4 &1785166939
 Transform:
   m_ObjectHideFlags: 0

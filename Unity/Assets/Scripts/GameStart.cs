@@ -6,7 +6,7 @@ public class GameStart : MonoBehaviour {
 	// player Prefab from inspector
 	public GameObject player;
 	// array of chickes
-	public GameObject[] chickens;
+	public List<GameObject> chickens;
 	// actual chicken to move (index of chickens)
 	public int actualChicken;
 
@@ -20,9 +20,9 @@ public class GameStart : MonoBehaviour {
 	void Start () {
 		actualChicken = 0;
 
-		chickens = new GameObject[chickenNum];
-		for (var i=0; i < chickens.Length; i++) {
-			chickens[i] = Instantiate(player, new Vector3(-7.82f + i, -3.0f, 0), Quaternion.identity);
+		chickens = new List<GameObject>();
+		for (var i = 0; i < chickenNum; i++) {
+			chickens.Add (Instantiate (player, new Vector3 (-7.82f + i, -3.0f, 0), Quaternion.identity));
 		}
 		playerController = chickens[0].GetComponent<PlayerController>();
 		playerController.setMovement(true);
