@@ -11,7 +11,7 @@ public class GameStart : MonoBehaviour {
 	public int actualChicken;
 
 	//chicken numbers
-	private int chickenNum = 5;
+	private int chickenNum = Globals.numChickens;//num of chickens seleted in lobby scene
 	private PlayerController playerController;
 	private CameraFollow camFollow;
 
