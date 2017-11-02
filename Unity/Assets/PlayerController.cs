@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 		// Obtenim el component animador
 		anim = GetComponent<Animator>();
 		//Get player
-		playerGraphics = transform.FindChild("Player");
+		playerGraphics = transform.Find("Player");
 
 		if (playerGraphics == null)
 		{
