@@ -1559,7 +1559,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.543087
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1582,7 +1582,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308917936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.05, y: -0.42, z: -10}
+  m_LocalPosition: {x: -2.74, y: -1.14, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2157,7 +2157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402db710edc9c4c42b985e33724ea156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1089087166140234, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
+  player: {fileID: 1158655478459562, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
   chickens: []
   actualChicken: 0
 --- !u!4 &1785166939

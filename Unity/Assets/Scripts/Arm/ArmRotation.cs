@@ -18,7 +18,7 @@ public class ArmRotation : MonoBehaviour
             Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             difference.Normalize();
 
-            //Fin angle in degrees where arm is pointing.
+            //Find angle in degrees where arm is pointing.
             float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
             transform.rotation = Quaternion.Euler(0f, 0f, rotZ + rotationOffset);
@@ -27,4 +27,19 @@ public class ArmRotation : MonoBehaviour
     public void setEnabledRotation(bool enabled){
         rotationEnabled = enabled;
     }
+
+	public void flip(float h){
+		// Vamos a la derecha
+		if (h > 0.1f) {
+			// Assignem nou vector
+			transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
+
+		// Vamos a la izq. i girem el personatge mirem la izq.
+		if (h < -0.1f) {
+			transform.localScale = new Vector3 (-1f, -1f, 1f);
+		}
+	}
+
+
 }

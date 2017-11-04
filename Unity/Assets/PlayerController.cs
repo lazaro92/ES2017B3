@@ -25,9 +25,12 @@ public class PlayerController : MonoBehaviour {
 	// Health
 	private int health = Globals.HEALTHVALUE;
 
-	Transform playerGraphics; //Reference to the graphics, so we can change the direction
+	//Arm
+	private GameObject arm;//Persistent
+	private ArmRotation rotation;
 
-
+	private GameObject goPistol;
+	private Pistol pistol;
 
 
 	// Use this for initialization
@@ -36,13 +39,12 @@ public class PlayerController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 		// Obtenim el component animador
 		anim = GetComponent<Animator>();
-		//Get player
-		playerGraphics = transform.Find("Player");
+		//Arm 
+		arm = transform.Find("Arm").gameObject;
+		rotation = arm.GetComponent<ArmRotation>();
 
-		if (playerGraphics == null)
-		{
-			Debug.LogError("There is no child in Graphics");
-		}
+		goPistol = transform.Find ("Arm/Pistol").gameObject;
+		pistol = goPistol.GetComponent<Pistol>();
 
 	}
 
@@ -89,9 +91,9 @@ public class PlayerController : MonoBehaviour {
 		// Detectem quan apretem l'eix horizontal -1 izq, 1 derecha (direcció)
 		float h = Input.GetAxis("Horizontal");
 
-		if (!movement)
+		if (!movement) {
 			h = 0;
-
+		}
 		// Apliquem força fisica al rigidbody al personatge
 		rb2d.AddForce(Vector2.right * speed * h);
 
@@ -100,17 +102,32 @@ public class PlayerController : MonoBehaviour {
 		float limitedSpeed = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed); ;
 		rb2d.velocity = new Vector2(limitedSpeed, rb2d.velocity.y);
 
+
 		// Vamos a la derecha
 		if (h > 0.1f)
 		{
 			// Assignem nou vector
-			playerGraphics.localScale = new Vector3(1f, 1f, 1f);
-		}
+			transform.localScale = new Vector3(1f, 1f, 1f);
+			//Arm 
+			rotation.flip (h);
+			rotation.setEnabledRotation (false);
+			pistol.setEnabledShoot (false);
+			arm.SetActive (false);
 
+
+		}
 		// Vamos a la izq. i girem el personatge mirem la izq.
 		if (h < -0.1f)
 		{
-			playerGraphics.localScale = new Vector3(-1f, 1f, 1f);
+			transform.localScale = new Vector3(-1f, 1f, 1f);
+			//Arm 
+			rotation.flip (h);
+			rotation.setEnabledRotation (false);
+			pistol.setEnabledShoot (false);
+			arm.SetActive (false);
+		}
+		if(0.1f > h && h > -0.1f){
+			arm.SetActive (true);
 		}
 			
 		if (jump)
@@ -133,14 +150,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void setMovement(bool movement){
 		this.movement = movement;
-
-		GameObject arm = transform.Find("Arm").gameObject;
-		ArmRotation rotation = arm.GetComponent<ArmRotation>();
+		//Enable rotation to player
 		rotation.setEnabledRotation(movement);
-
-		GameObject goPistol = transform.Find("Arm/Pistol").gameObject;
-		Pistol pistol = goPistol.GetComponent<Pistol>();
-		pistol.setEnabledShoot(movement);
+		pistol.setEnabledShoot (movement);
 	}
 
 	/*

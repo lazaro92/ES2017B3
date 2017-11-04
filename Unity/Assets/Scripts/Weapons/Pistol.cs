@@ -10,6 +10,10 @@ public class Pistol : MonoBehaviour
 	private int damage = Globals.PISTOL_DAMAGE; //Damage is for the damage of the player that hit it.
     public LayerMask wantToHit; //Is the layers that we want to hit
 
+	public Transform MuzzleFlashPrefab;
+	float timeToSpawnEffect = 0;
+	public float effectSpawnRate = 10;
+
     private bool enabledShoot = false;
     float timeToFire = 0;
     Transform firePoint;
@@ -57,12 +61,16 @@ public class Pistol : MonoBehaviour
         Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.blue);
         if (hit.collider != null)
         {
-            Debug.DrawLine(firePointPosition, hit.point, Color.red);
-			Debug.Log(hit.collider.name + " has been shot with damage of " + getDamageEqualDistance(hit)); //getDamageEqualDistance(hit)
-			if (hit.collider.name == "Player(Clone)") {
-				GameObject hitPlayer = hit.transform.gameObject;
-				PlayerController player = hitPlayer.GetComponent<PlayerController> ();
-				player.decreaseHealth (getDamageEqualDistance(hit));
+			if (Time.time >= timeToSpawnEffect){
+				Effect();
+				timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
+	            Debug.DrawLine(firePointPosition, hit.point, Color.red);
+				Debug.Log(hit.collider.name + " has been shot with damage of " + getDamageEqualDistance(hit)); //getDamageEqualDistance(hit)
+				if (hit.collider.name == "Player(Clone)") {
+					GameObject hitPlayer = hit.transform.gameObject;
+					PlayerController player = hitPlayer.GetComponent<PlayerController> ();
+					player.decreaseHealth (getDamageEqualDistance(hit));
+				}
 			}
         }
     }
@@ -79,6 +87,14 @@ public class Pistol : MonoBehaviour
 		return (int) finalDamage;
     }
 
+	//Flash effect
+	void Effect(){
+		Transform clone = Instantiate (MuzzleFlashPrefab, firePoint.position, firePoint.rotation) as Transform;
+		clone.parent = firePoint;
+		float size = Random.Range (0.6f, 0.9f);
+		clone.localScale = new Vector3 (size, size, size);
+		Destroy (clone.gameObject, 0.02f);
+	}
     // setter for chicken
     public void setEnabledShoot(bool enable){
         enabledShoot = enable;
