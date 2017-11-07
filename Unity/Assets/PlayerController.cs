@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour {
 			//GameObject startObject = transform.Find("initScript").gameObject;
 			//GameStart start = startObject.GetComponent<GameStart>();
 			//start.chickens.Remove (this.gameObject);
-			//Destroy (this.gameObject);
+			Destroy (this.gameObject);
             //TODO: transformar en pollastre rostit
 		}
 	}

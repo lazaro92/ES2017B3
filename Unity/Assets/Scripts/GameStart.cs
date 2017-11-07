@@ -32,11 +32,10 @@ public class GameStart : MonoBehaviour {
             chickens[j] = new GameObject[chickensPerTeam[j]];
             for (var i = 0; i < chickens[j].Length; i++)
             {
-                chickens[j][i] = Instantiate(player, new Vector3(-7.82f + i, -3.0f, 0), Quaternion.identity);
+                chickens[j][i] = Instantiate(player, new Vector3(-7.82f + i, -1.0f, 0), Quaternion.identity);
             }
         }
         playerController = chickens[0][0].GetComponent<PlayerController>();
-        playerController.setMovement(true);
 
         camFollow = Camera.main.GetComponent<CameraFollow>();
     }
@@ -44,7 +43,7 @@ public class GameStart : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         int currentTeam, currentChicken;
-
+		playerController.setMovement(true);
         if (Input.GetKeyDown(KeyCode.N)) //Code to change turn
         {
             playerController.setMovement(false); //release the current chicken
