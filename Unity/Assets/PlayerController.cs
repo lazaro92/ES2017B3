@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 	// Control moviment
 	private bool movement = false;
 	// Health
-	private int health = Globals.HEALTHVALUE;
+	public int health = Globals.HEALTHVALUE;
 
 	//Arm
 	private GameObject arm;//Persistent
@@ -50,9 +50,9 @@ public class PlayerController : MonoBehaviour {
 
 	// Problemes amb fisiques
 	void Update () {
-		// Asignem la velocitat del personatge. Buscan el valor positiu
+		// Assignem la velocitat del personatge. Buscant el valor positiu
 		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
-		// Asigenm si toquem el terra
+		// Assignem si toquem el terra
 		anim.SetBool("Grounded", grounded);
 
 		// Comprovem si estem al terra (salt de precaució)
@@ -160,13 +160,14 @@ public class PlayerController : MonoBehaviour {
  +	*/
 	public void decreaseHealth(int health){
 		if (this.health > health) {
-			this.health = this.health - health;
+			this.health -= health;
 		} else {
 			this.health = 0;
 			//GameObject startObject = transform.Find("initScript").gameObject;
 			//GameStart start = startObject.GetComponent<GameStart>();
 			//start.chickens.Remove (this.gameObject);
-			Destroy (this.gameObject);
+			//Destroy (this.gameObject);
+            //TODO: transformar en pollastre rostit
 		}
 	}
 		
