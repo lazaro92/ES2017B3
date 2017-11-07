@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	public float maxSpeed = 5f;
 	// Bool per saber si toquem terra
 	public bool grounded;
+	// Bool per saber si és mort
+	public bool dead;
 	// La força de salt
 	public float jumpPower = 6.5f;
 
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour {
 		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
 		// Assignem si toquem el terra
 		anim.SetBool("Grounded", grounded);
+		// Asigenm si està mort
+		anim.SetBool("Dead", dead);
 
 		// Comprovem si estem al terra (salt de precaució)
 		if (grounded) {
@@ -166,9 +170,15 @@ public class PlayerController : MonoBehaviour {
 			//GameObject startObject = transform.Find("initScript").gameObject;
 			//GameStart start = startObject.GetComponent<GameStart>();
 			//start.chickens.Remove (this.gameObject);
-			Destroy (this.gameObject);
-            //TODO: transformar en pollastre rostit
+			dead = true;
+			StartCoroutine("waitSeconds");
 		}
+	}
+
+	// Espera 2 segons abans d'eliminar el pollastre
+	IEnumerator waitSeconds(){
+		yield return new WaitForSeconds(2f);
+		Destroy (this.gameObject);
 	}
 		
 }
