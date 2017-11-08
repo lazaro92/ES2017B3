@@ -114,9 +114,7 @@ public class PlayerController : MonoBehaviour {
 			transform.localScale = new Vector3(1f, 1f, 1f);
 			//Arm 
 			rotation.flip (h);
-			rotation.setEnabledRotation (false);
-			pistol.setEnabledShoot (false);
-			arm.SetActive (false);
+			deactivateArm();
 
 
 		}
@@ -126,11 +124,9 @@ public class PlayerController : MonoBehaviour {
 			transform.localScale = new Vector3(-1f, 1f, 1f);
 			//Arm 
 			rotation.flip (h);
-			rotation.setEnabledRotation (false);
-			pistol.setEnabledShoot (false);
-			arm.SetActive (false);
+			deactivateArm();
 		}
-		if(0.1f > h && h > -0.1f){
+		if(0.1f > h && h > -0.1f && !dead){
 			arm.SetActive (true);
 		}
 			
@@ -171,6 +167,9 @@ public class PlayerController : MonoBehaviour {
 			//GameStart start = startObject.GetComponent<GameStart>();
 			//start.chickens.Remove (this.gameObject);
 			dead = true;
+			deactivateArm();
+			Destroy (this.goPistol);
+			Destroy (this.arm);
 			StartCoroutine("waitSeconds");
 		}
 	}
@@ -179,6 +178,16 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator waitSeconds(){
 		yield return new WaitForSeconds(2f);
 		Destroy (this.gameObject);
+	}
+		
+
+	/**
+	 * Deactivate arm
+	 */
+	private void deactivateArm(){
+		rotation.setEnabledRotation (false);
+		pistol.setEnabledShoot (false);
+		arm.SetActive (false);
 	}
 		
 }
