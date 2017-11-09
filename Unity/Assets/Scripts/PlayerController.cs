@@ -150,9 +150,17 @@ public class PlayerController : MonoBehaviour {
 
 	public void setMovement(bool movement){
 		this.movement = movement;
-		//Enable rotation to player
-		rotation.setEnabledRotation(movement);
-		pistol.setEnabledShoot (movement);
+        //Enable rotation to player
+        if (this.rotation == null || this.pistol == null) // ALERTA (más de lo mismo)
+        {
+            arm = transform.Find("Arm").gameObject;
+            rotation = arm.GetComponent<ArmRotation>();
+
+            goPistol = transform.Find("Arm/Pistol").gameObject;
+            pistol = goPistol.GetComponent<Pistol>();
+        }
+		this.rotation.setEnabledRotation(movement);
+		this.pistol.setEnabledShoot (movement);
 	}
 
 	/*
@@ -163,21 +171,20 @@ public class PlayerController : MonoBehaviour {
 			this.health -= health;
 		} else {
 			this.health = 0;
-			//GameObject startObject = transform.Find("initScript").gameObject;
-			//GameStart start = startObject.GetComponent<GameStart>();
-			//start.chickens.Remove (this.gameObject);
+
 			dead = true;
 			deactivateArm();
 			Destroy (this.goPistol);
 			Destroy (this.arm);
-			StartCoroutine("waitSeconds");
+            GameStart.deleteChicken(this.gameObject);
+            StartCoroutine("waitSeconds");
 		}
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
 	IEnumerator waitSeconds(){
 		yield return new WaitForSeconds(2f);
-		Destroy (this.gameObject);
+        Destroy(this.gameObject);
 	}
 		
 
