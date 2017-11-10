@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour {
     // player Prefab from inspector
@@ -13,7 +14,7 @@ public class GameStart : MonoBehaviour {
     //chicken numbers
     public static int numTeams = 2; //hardcoded for now
     public int[] chickensPerTeam = { Globals.numChickens, Globals.numChickens }; //static number of chicken per team, for now
-    public static LinkedList<GameObject>[] squads = new LinkedList<GameObject>[Globals.MAXTEAMS]; //array of linkedlists, one per team
+    public static List<LinkedList<GameObject>> squads = new List<LinkedList<GameObject>>(); //array of linkedlists, one per team
     public static LinkedListNode<GameObject> [] currentChickens; // last chicken of every team who played
     LinkedListNode<GameObject> nextChicken;
 
@@ -26,7 +27,7 @@ public class GameStart : MonoBehaviour {
         teamCounter = 0;
         currentChickens = new LinkedListNode<GameObject>[numTeams];
         for (var team = 0; team < numTeams; team++) { // for every team
-            squads[team] = new LinkedList<GameObject>();
+            squads.Add(new LinkedList<GameObject>());
             
             for (var i = 0; i < chickensPerTeam[team]; i++) // add the amount of chickens necessary
                 squads[team].AddFirst( (GameObject) Instantiate(player, new Vector3(-7.82f + i, -1.0f, 0), Quaternion.identity));
@@ -62,7 +63,9 @@ public class GameStart : MonoBehaviour {
 
 	public static void deleteChicken(GameObject chicken)
 	{
-		for (var team = 0; team < numTeams; team++)
+		int team;
+
+		for (team = 0; team < numTeams; team++)
 			if (chicken == currentChickens[team].Value)
 			{
 				currentChickens[team] = currentChickens[team].Previous ?? squads[team].Last;
@@ -72,5 +75,18 @@ public class GameStart : MonoBehaviour {
 			}
 			else if (squads[team].Remove(chicken))
 				break;
+
+		if (squads[team].Count == 0)
+		{
+			numTeams--;
+			squads.RemoveAt(team);
+			if (squads.Count <= 1)
+				SceneManager.LoadScene("FinalScene");
+			if (team < currentTeam)
+				currentTeam--;
+		}
+
 	}
+
+
 }
