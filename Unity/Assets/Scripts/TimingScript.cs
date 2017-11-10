@@ -13,7 +13,7 @@ public class TimingScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		varTime = 60;
+		varTime = 5;
 		txtTime = GameObject.Find("txtTime").GetComponent<Text>();
 	}
 	
@@ -21,11 +21,11 @@ public class TimingScript : MonoBehaviour {
 	void Update () {
 		varTime -= Time.deltaTime;
 		txtTime.text = ((int) varTime).ToString();
-		// Debug.Log ("var: " + varTime); // Veure i entendre el temps
 		if (ENDTIME > varTime) {
-			// varTime %= endTime;
-			//Debug.Log ("Prova"); // Quan fa la crida
-			SceneManager.LoadScene ("FinalScene");
+            varTime = 5;
+            Globals.changeTurn = true;
+            if(false)
+			    SceneManager.LoadScene ("FinalScene");
 		}
 	}
 

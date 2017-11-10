@@ -13,7 +13,6 @@ public class Globals : MonoBehaviour {
 	public static int numFlags = 0; //initial chickens to gameplay
 	public static bool limitedAmmo = true;
 	public static int health = 200;
-
-
-
+    internal static readonly int MAXTEAMS = 2;
+    internal static bool changeTurn = false;
 }

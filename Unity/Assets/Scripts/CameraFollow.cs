@@ -15,8 +15,7 @@ public class CameraFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameStartReference = GameObject.Find("initScript").GetComponent<GameStart>();
-        follow = gameStartReference.chickens[0][0];
+        follow = GameStart.squads[0].First.Value;
 	}
 
 	// Update is called once per frame (Update es un bucle)
@@ -34,8 +33,7 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	
-	public void setFollower(int team, int player){
-        GameObject chicken = gameStartReference.chickens[team][player];
-        follow = chicken;
+	public void setFollower(GameObject c){
+        follow = c;
 	}
 }
