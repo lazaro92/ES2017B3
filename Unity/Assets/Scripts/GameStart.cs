@@ -14,8 +14,8 @@ public class GameStart : MonoBehaviour {
     public static int numTeams = 2; //hardcoded for now
     public int[] chickensPerTeam = { Globals.numChickens, Globals.numChickens }; //static number of chicken per team, for now
     public static LinkedList<GameObject>[] squads = new LinkedList<GameObject>[Globals.MAXTEAMS]; //array of linkedlists, one per team
-    public static LinkedListNode<GameObject> [] lastChicken; // last chicken of every team who played
-    LinkedListNode<GameObject> currentChicken;
+    public static LinkedListNode<GameObject> [] currentChickens; // last chicken of every team who played
+    LinkedListNode<GameObject> nextChicken;
 
     private PlayerController playerController;
 	private CameraFollow camFollow;
@@ -24,14 +24,14 @@ public class GameStart : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         teamCounter = 0;
-        lastChicken = new LinkedListNode<GameObject>[numTeams];
+        currentChickens = new LinkedListNode<GameObject>[numTeams];
         for (var team = 0; team < numTeams; team++) { // for every team
             squads[team] = new LinkedList<GameObject>();
             
             for (var i = 0; i < chickensPerTeam[team]; i++) // add the amount of chickens necessary
-                squads[team].AddLast( (GameObject) Instantiate(player, new Vector3(-7.82f + i, -1.0f, 0), Quaternion.identity));
+                squads[team].AddFirst( (GameObject) Instantiate(player, new Vector3(-7.82f + i, -1.0f, 0), Quaternion.identity));
                 
-            lastChicken[team] = squads[team].First;
+            currentChickens[team] = squads[team].First;
         }
         playerController = squads[0].First.Value.GetComponent<PlayerController>(); // put the first chicken on play
         playerController.setMovement(true);
@@ -49,25 +49,28 @@ public class GameStart : MonoBehaviour {
 
             currentTeam = ++teamCounter % numTeams; //get the current team
 
-            currentChicken = lastChicken[currentTeam].Next ?? squads[currentTeam].First;
+            nextChicken = currentChickens[currentTeam].Next ?? squads[currentTeam].First;
 
             /* Assign the new chicken in play */
-            playerController = currentChicken.Value.GetComponent<PlayerController>();
+            playerController = nextChicken.Value.GetComponent<PlayerController>();
             playerController.setMovement(true);
-            camFollow = Camera.main.GetComponent<CameraFollow>(); //ALERTA! he hagut de fer això pq sino no anava...
-            camFollow.setFollower(currentChicken.Value);
+            camFollow.setFollower(nextChicken.Value);
 
-            lastChicken[currentTeam] = currentChicken; //set the current chicken as the last chicken who played for this team
+            currentChickens[currentTeam] = nextChicken; //set the current chicken as the last chicken who played for this team
         }
     }
 
-    public static void deleteChicken(GameObject chicken)
-    {
-        if (chicken == lastChicken[currentTeam].Value)
-            lastChicken[currentTeam] = lastChicken[currentTeam].Previous ?? squads[currentTeam].Last; // apártate que vamos a hacer cosas muy feas...
-
-        for (var team = 0; team < numTeams; team++)
-            if (squads[team].Remove(chicken))
-                break;
-    }
+	public static void deleteChicken(GameObject chicken)
+	{
+		for (var team = 0; team < numTeams; team++)
+			if (chicken == currentChickens[team].Value)
+			{
+				currentChickens[team] = currentChickens[team].Previous ?? squads[team].Last;
+				squads[team].Remove(chicken);
+				Globals.changeTurn = true;
+				break;
+			}
+			else if (squads[team].Remove(chicken))
+				break;
+	}
 }
