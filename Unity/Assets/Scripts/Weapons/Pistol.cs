@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : MonoBehaviour
-{
+public class Pistol : MonoBehaviour{
 
     //Variables
     private float fireRate = 0; //FireRate is for how many bullets go when you press click (0 is for 1 bullet rate)
@@ -17,6 +16,10 @@ public class Pistol : MonoBehaviour
     private bool enabledShoot = false;
     float timeToFire = 0;
     Transform firePoint;
+
+	//Ammo
+	private bool infiniteAmmo = !Globals.limitedAmmo; //OJO Negado
+	private int magazine = Globals.PISTOL_AMMO;
 
     // Use this for initialization
     void Awake()
@@ -35,10 +38,19 @@ public class Pistol : MonoBehaviour
         //If there is a sigle shot
         if (fireRate == 0)
         {
+				
             //Check if fireButton is pressed
             if (Input.GetButtonDown("Fire1") && enabledShoot)
             {
-                Shoot();
+				if (magazine > 0) {
+					Shoot ();
+					if (!infiniteAmmo) {
+						magazine--;
+					}
+				} else {
+					Debug.Log("There are no bullets in magazine");
+				}
+
             }
         }
         //If firerate is diferent than 0 we do a burst shoot
@@ -46,8 +58,17 @@ public class Pistol : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") & Time.time > timeToFire && enabledShoot)
             {
-                timeToFire = Time.time + 1 / fireRate;
-                Shoot();
+				if (magazine > 0) {
+					
+					timeToFire = Time.time + 1 / fireRate;
+					Shoot ();
+					if (!infiniteAmmo) {
+						magazine--;
+					}
+
+				} else {
+					Debug.Log("There are no bullets in magazine");
+				}
             }
         }
     }
@@ -95,7 +116,7 @@ public class Pistol : MonoBehaviour
 		clone.localScale = new Vector3 (size, size, size);
 		Destroy (clone.gameObject, 0.02f);
 	}
-    // setter for chicken
+    //EnableShoot for the chicken
     public void setEnabledShoot(bool enable){
         enabledShoot = enable;
     }

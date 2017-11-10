@@ -127,7 +127,10 @@ public class PlayerController : MonoBehaviour {
 			deactivateArm();
 		}
 		if(0.1f > h && h > -0.1f && !dead){
-			arm.SetActive (true);
+			//Debug.Log ("Arm is active!!!");
+			if (movement) {
+				activateArm ();
+			}
 		}
 			
 		if (jump)
@@ -148,8 +151,9 @@ public class PlayerController : MonoBehaviour {
 	}
 	*/
 
-	public void setMovement(bool movement){
-		this.movement = movement;
+	public void setMovement(bool mov){
+		//Debug.Log (mov);
+		this.movement = mov;
         //Enable rotation to player
         if (this.rotation == null || this.pistol == null) // ALERTA (más de lo mismo)
         {
@@ -195,6 +199,14 @@ public class PlayerController : MonoBehaviour {
 		rotation.setEnabledRotation (false);
 		pistol.setEnabledShoot (false);
 		arm.SetActive (false);
+	}
+	/**
+	 * Activate arm
+	 */
+	private void activateArm(){
+		rotation.setEnabledRotation (true);
+		pistol.setEnabledShoot(true);
+		arm.SetActive (true);
 	}
 		
 }
