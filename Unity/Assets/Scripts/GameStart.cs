@@ -28,7 +28,7 @@ public class GameStart : MonoBehaviour {
         currentChickens = new LinkedListNode<GameObject>[numTeams];
         for (var team = 0; team < numTeams; team++) { // for every team
             squads.Add(new LinkedList<GameObject>());
-            
+			player.gameObject.tag = "team"+team;
             for (var i = 0; i < chickensPerTeam[team]; i++) // add the amount of chickens necessary
                 squads[team].AddFirst( (GameObject) Instantiate(player, new Vector3(-7.82f + i, -1.0f, 0), Quaternion.identity));
                 

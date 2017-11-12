@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour {
 	public bool grounded;
 	// Bool per saber si és mort
 	public bool dead;
+	// Bool per saber equip
+	public bool teamRed;
+	// Bool per saber equip
+	public bool teamBlue;
 	// La força de salt
 	public float jumpPower = 6.5f;
 
@@ -26,6 +30,8 @@ public class PlayerController : MonoBehaviour {
 	private bool movement = false;
 	// Health
 	public int health = Globals.HEALTHVALUE;
+	// Canviar el color del personatge
+	private SpriteRenderer spr;
 
 	//Arm
 	private GameObject arm;//Persistent
@@ -41,12 +47,19 @@ public class PlayerController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 		// Obtenim el component animador
 		anim = GetComponent<Animator>();
+		spr = GetComponent<SpriteRenderer>();
 		//Arm 
 		arm = transform.Find("Arm").gameObject;
 		rotation = arm.GetComponent<ArmRotation>();
 
 		goPistol = transform.Find ("Arm/Pistol").gameObject;
 		pistol = goPistol.GetComponent<Pistol>();
+
+		if (gameObject.tag == "team1") {
+			teamRed = true;
+		} else {
+			teamBlue = true;
+		}
 
 	}
 
@@ -58,6 +71,10 @@ public class PlayerController : MonoBehaviour {
 		anim.SetBool("Grounded", grounded);
 		// Asigenm si està mort
 		anim.SetBool("Dead", dead);
+		// Asigenm si és Red
+		anim.SetBool("TeamRed", teamRed);
+		// Asigenm si és Red
+		anim.SetBool("TeamBlue", teamBlue);
 
 		// Comprovem si estem al terra (salt de precaució)
 		if (grounded) {
@@ -173,24 +190,30 @@ public class PlayerController : MonoBehaviour {
 	public void decreaseHealth(int health){
 		if (this.health > health) {
 			this.health -= health;
+			//spr.color = Color.red;
+			//StartCoroutine("waitSecondsHealth");
 		} else {
 			this.health = 0;
-
 			dead = true;
 			deactivateArm();
 			Destroy (this.goPistol);
 			Destroy (this.arm);
             GameStart.deleteChicken(this.gameObject);
-            StartCoroutine("waitSeconds");
+			StartCoroutine("waitSecondsDead");
 		}
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
-	IEnumerator waitSeconds(){
+	IEnumerator waitSecondsDead(){
 		yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
 	}
-		
+
+	// Espera 1 segons 
+	IEnumerator waitSecondsHealth(){
+		yield return new WaitForSeconds(0.5f);
+		spr.color = Color.white;
+	}
 
 	/**
 	 * Deactivate arm
