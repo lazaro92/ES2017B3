@@ -12,9 +12,9 @@ public class GameStart : MonoBehaviour {
     private int teamCounter;
     public static int currentTeam;
     //chicken numbers
-    public static int numTeams = 2; //hardcoded for now
-    public int[] chickensPerTeam = { Globals.numChickens, Globals.numChickens }; //static number of chicken per team, for now
-    public static List<LinkedList<GameObject>> squads = new List<LinkedList<GameObject>>(); //array of linkedlists, one per team
+    public static int numTeams; //hardcoded for now
+    public int[] chickensPerTeam; //static number of chicken per team, for now
+    public static List<LinkedList<GameObject>> squads; //array of linkedlists, one per team
     public static LinkedListNode<GameObject> [] currentChickens; // last chicken of every team who played
     LinkedListNode<GameObject> nextChicken;
 
@@ -24,8 +24,11 @@ public class GameStart : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        numTeams = 2;
         teamCounter = 0;
+        chickensPerTeam = new int[] { Globals.numChickens, Globals.numChickens };
         currentChickens = new LinkedListNode<GameObject>[numTeams];
+        squads = new List<LinkedList<GameObject>>();
         for (var team = 0; team < numTeams; team++) { // for every team
             squads.Add(new LinkedList<GameObject>());
 			player.gameObject.tag = "team"+team;
