@@ -11,6 +11,10 @@ public class GameStart : MonoBehaviour {
     // current chicken to move (index of chickens)
     private int teamCounter;
     public static int currentTeam;
+	// Control cursor
+	public Texture2D cursorTexture;
+	public CursorMode cursorMode = CursorMode.Auto;
+	public Vector2 hotSpot = Vector2.zero;
     //chicken numbers
     public static int numTeams; //hardcoded for now
     public int[] chickensPerTeam; //static number of chicken per team, for now
@@ -41,6 +45,9 @@ public class GameStart : MonoBehaviour {
         playerController.setMovement(true);
 
         camFollow = Camera.main.GetComponent<CameraFollow>();
+
+		//Cursor
+		OnMouseEnter();
     }
 	
 	// Update is called once per frame
@@ -89,6 +96,12 @@ public class GameStart : MonoBehaviour {
 				currentTeam--;
 		}
 
+	}
+
+	// Change cursor
+	void OnMouseEnter()
+	{
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 	}
 
 

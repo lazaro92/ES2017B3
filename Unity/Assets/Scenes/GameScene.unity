@@ -2429,8 +2429,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1784203954326686, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
-  chickens: []
-  actualChicken: 0
+  cursorTexture: {fileID: 2800000, guid: e520e03742167f1498d539518fc6aa12, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
+  chickensPerTeam: 
 --- !u!4 &1785166939
 Transform:
   m_ObjectHideFlags: 0

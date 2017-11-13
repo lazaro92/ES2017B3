@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuObject : MonoBehaviour {
 
+	public CursorMode cursorMode = CursorMode.Auto;
+
 	// Use this for initialization
 	void Start () {
-		
+		OnMouseExit (); // Cursor
 	}
 	
 	// Update is called once per frame
@@ -23,4 +25,11 @@ public class MenuObject : MonoBehaviour {
 	public void ExitGame(){
 		Application.Quit ();
 	}
+
+	// Change cursor
+	void OnMouseExit()
+	{
+		Cursor.SetCursor(null, Vector2.zero, cursorMode);
+	}
+
 }
