@@ -11,8 +11,8 @@ public class Globals : MonoBehaviour {
 	public const int PISTOL_AMMO = 10; //If limitedAmmo is true
 
 	//STATIC
-	public static int numChickens = 0; //initial chickens to gameplay
-	public static int numFlags = 0; //initial chickens to gameplay
+	public static int numChickens = 2; //initial chickens to gameplay
+	public static int numFlags = 2; //initial chickens to gameplay
 	public static bool limitedAmmo = true;
 	public static int health = 200;
     internal static readonly int MAXTEAMS = 2;
