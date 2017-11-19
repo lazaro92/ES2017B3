@@ -9,7 +9,8 @@ public class Globals : MonoBehaviour {
 	//Pistol
 	public const int PISTOL_DAMAGE = 50;
 	public const int PISTOL_AMMO = 10; //If limitedAmmo is true
-
+	//Pickaxe
+	public const int PICKAXE_DAMAGE = 100;
 	//STATIC
 	public static int numChickens = 2; //initial chickens to gameplay
 	public static int numFlags = 2; //initial chickens to gameplay

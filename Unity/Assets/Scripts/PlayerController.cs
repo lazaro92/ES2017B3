@@ -37,8 +37,12 @@ public class PlayerController : MonoBehaviour {
 	private GameObject arm;//Persistent
 	private ArmRotation rotation;
 
+	//TODO Albert
 	private GameObject goPistol;
 	private Pistol pistol;
+
+	private GameObject goPickaxe;
+	private Pickaxe pickaxe;
 
 
 	// Use this for initialization
@@ -54,6 +58,11 @@ public class PlayerController : MonoBehaviour {
 
 		goPistol = transform.Find ("Arm/Pistol").gameObject;
 		pistol = goPistol.GetComponent<Pistol>();
+
+		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+		pickaxe = goPickaxe.GetComponent<Pickaxe>();
+
+		goPickaxe.active = false;
 
 		if (gameObject.tag == "team1") {
 			teamRed = true;
@@ -93,7 +102,16 @@ public class PlayerController : MonoBehaviour {
 				doubleJump = false;
 			}
 		}
-
+		if (movement) {
+			if (Input.GetKeyDown(KeyCode.Alpha1)) {
+				goPistol.active = true;
+				goPickaxe.active = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				goPickaxe.active =true;
+				goPistol.active =false;
+			} 
+		}
 	}
 
 	// Evitem problemes amb fisiques (funciona per frames)
@@ -179,9 +197,13 @@ public class PlayerController : MonoBehaviour {
 
             goPistol = transform.Find("Arm/Pistol").gameObject;
             pistol = goPistol.GetComponent<Pistol>();
+
+			goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+			pickaxe = goPickaxe.GetComponent<Pickaxe>();
         }
 		this.rotation.setEnabledRotation(movement);
-		this.pistol.setEnabledShoot (movement);
+		this.pistol.setEnabledShoot (movement);//TODO Albert
+		this.pickaxe.setEnabledShoot (movement);
 	}
 
 	/*
@@ -196,11 +218,16 @@ public class PlayerController : MonoBehaviour {
 			this.health = 0;
 			dead = true;
 			deactivateArm();
-			Destroy (this.goPistol);
+			Destroy (this.goPistol); //TODO: Albert
+			Destroy (this.goPickaxe);
 			Destroy (this.arm);
             GameStart.deleteChicken(this.gameObject);
 			StartCoroutine("waitSecondsDead");
 		}
+	}
+
+	public void selectWeapon(KeyCode key) {
+		
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
@@ -220,7 +247,9 @@ public class PlayerController : MonoBehaviour {
 	 */
 	private void deactivateArm(){
 		rotation.setEnabledRotation (false);
+		//TODO Albert
 		pistol.setEnabledShoot (false);
+		pickaxe.setEnabledShoot (false);
 		arm.SetActive (false);
 	}
 	/**
@@ -229,6 +258,7 @@ public class PlayerController : MonoBehaviour {
 	private void activateArm(){
 		rotation.setEnabledRotation (true);
 		pistol.setEnabledShoot(true);
+		pistol.setEnabledShoot (true);
 		arm.SetActive (true);
 	}
 		
