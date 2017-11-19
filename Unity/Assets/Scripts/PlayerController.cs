@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour {
 		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
 		pickaxe = goPickaxe.GetComponent<Pickaxe>();
 
+		goPickaxe.active = false;
+
 		if (gameObject.tag == "team1") {
 			teamRed = true;
 		} else {
@@ -100,7 +102,16 @@ public class PlayerController : MonoBehaviour {
 				doubleJump = false;
 			}
 		}
-
+		if (movement) {
+			if (Input.GetKeyDown(KeyCode.Alpha1)) {
+				goPistol.active = true;
+				goPickaxe.active = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				goPickaxe.active =true;
+				goPistol.active =false;
+			} 
+		}
 	}
 
 	// Evitem problemes amb fisiques (funciona per frames)
@@ -213,6 +224,10 @@ public class PlayerController : MonoBehaviour {
             GameStart.deleteChicken(this.gameObject);
 			StartCoroutine("waitSecondsDead");
 		}
+	}
+
+	public void selectWeapon(KeyCode key) {
+		
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
