@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c8dc27cd199104abe4832b2a3df6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: {fileID: 1968072048156620, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
+  follow: {fileID: 1283495770712440, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
   minCamPos: {x: -1.39, y: 0}
   maxCamPos: {x: 7.93, y: 0}
   smoothTime: 0.15
@@ -2428,7 +2428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402db710edc9c4c42b985e33724ea156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1968072048156620, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
+  player: {fileID: 1283495770712440, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
   cursorTexture: {fileID: 2800000, guid: e520e03742167f1498d539518fc6aa12, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}

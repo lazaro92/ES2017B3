@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 	// La força en el personatge horitzontalment perque es mogui
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	// Control moviment
 	private bool movement = false;
 	// Health
-	public int health = Globals.HEALTHVALUE;
+	public float health = Globals.HEALTHVALUE;
 	// Canviar el color del personatge
 	private SpriteRenderer spr;
 
@@ -44,6 +45,9 @@ public class PlayerController : MonoBehaviour {
 	private GameObject goPickaxe;
 	private Pickaxe pickaxe;
 
+	[Header("Unity Stuff")]
+	// Asignar la barra de vida al player
+	public Image healthBar;
 
 	// Use this for initialization
 	void Start () {
@@ -212,10 +216,14 @@ public class PlayerController : MonoBehaviour {
 	public void decreaseHealth(int health){
 		if (this.health > health) {
 			this.health -= health;
-			//spr.color = Color.red;
-			//StartCoroutine("waitSecondsHealth");
+			Color color = new Color (236/255f, 137/255f, 137/255f);
+			spr.color = color;
+			rotation.colorDamage();
+			StartCoroutine("waitSecondsHealth");
+			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restem la barra de vida 
 		} else {
 			this.health = 0;
+			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restema la barra de vida
 			dead = true;
 			deactivateArm();
 			Destroy (this.goPistol); //TODO: Albert
@@ -238,8 +246,11 @@ public class PlayerController : MonoBehaviour {
 
 	// Espera 1 segons 
 	IEnumerator waitSecondsHealth(){
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.4f);
 		spr.color = Color.white;
+		if (rotation != null) {
+			rotation.resetColor();
+		}
 	}
 
 	/**

@@ -10,6 +10,13 @@ public class ArmRotation : MonoBehaviour
 
     private bool rotationEnabled = false;
 
+	// Canviar color del braç
+	private SpriteRenderer spr;
+
+	//Start
+	void Start(){
+		spr = GetComponent<SpriteRenderer> ();
+	}
 
     // Update is called once per frame
     void Update()
@@ -41,5 +48,13 @@ public class ArmRotation : MonoBehaviour
 		}
 	}
 
+	public void colorDamage(){
+		Color color = new Color (236/255f, 137/255f, 137/255f);
+		spr.color = color;
+	}
+
+	public void resetColor(){
+		spr.color = Color.white;
+	}
 
 }
