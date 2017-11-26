@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour {
 	private GameObject goPickaxe;
 	private Pickaxe pickaxe;
 
+	// Canvas HUD i text
+	private Canvas HUD_player;
+	private Text txtMagazine;
+
 	[Header("Unity Stuff")]
 	// Asignar la barra de vida al player
 	public Image healthBar;
@@ -78,6 +82,16 @@ public class PlayerController : MonoBehaviour {
 
 	// Problemes amb fisiques
 	void Update () {
+		// Munició per cada pollo
+		if (pistol.getInfiniteAmmo () != true) {
+			// Mirem la munició
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString ();
+			//this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "Bullets: " + pistol.getMagazine ().ToString ();
+		} else {
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: ∞";
+		}
+		// HUD_player
+		HUD_player = this.GetComponentInChildren<Canvas>();
 		// Assignem la velocitat del personatge. Buscant el valor positiu
 		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
 		// Assignem si toquem el terra
@@ -151,6 +165,8 @@ public class PlayerController : MonoBehaviour {
 		{
 			// Assignem nou vector
 			transform.localScale = new Vector3(1f, 1f, 1f);
+			// Canviem la posició del HUD per veures bé
+			HUD_player.transform.localScale = new Vector3 (0.03f, 0.03f, 0.03f);
 			//Arm 
 			rotation.flip (h);
 			deactivateArm();
@@ -161,6 +177,8 @@ public class PlayerController : MonoBehaviour {
 		if (h < -0.1f)
 		{
 			transform.localScale = new Vector3(-1f, 1f, 1f);
+			// Canviem la posició del HUD per veures bé
+			HUD_player.transform.localScale = new Vector3 (-0.03f, 0.03f, 0.03f);
 			//Arm 
 			rotation.flip (h);
 			deactivateArm();

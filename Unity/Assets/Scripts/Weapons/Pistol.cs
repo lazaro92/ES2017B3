@@ -121,4 +121,12 @@ public class Pistol : MonoBehaviour{
     public void setEnabledShoot(bool enable){
         enabledShoot = enable;
     }
+
+	public int getMagazine(){
+		return magazine;
+	}
+
+	public bool getInfiniteAmmo(){
+		return infiniteAmmo;
+	}
 }

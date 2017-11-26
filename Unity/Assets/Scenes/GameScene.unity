@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c8dc27cd199104abe4832b2a3df6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: {fileID: 1283495770712440, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
+  follow: {fileID: 1771050792716318, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
   minCamPos: {x: -1.39, y: 0}
   maxCamPos: {x: 16.51, y: 0}
   smoothTime: 0.15
@@ -2307,6 +2307,46 @@ Prefab:
       propertyPath: m_FillAmount
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224774906987323840, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224774906987323840, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114890707326693398, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114890707326693398, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224774906987323840, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -49.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224774906987323840, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 112.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 114890707326693398, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224774906987323840, guid: a3d874de8b9524740b73630068974f62,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 23.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3d874de8b9524740b73630068974f62, type: 2}
   m_IsPrefabParent: 0
@@ -2337,7 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402db710edc9c4c42b985e33724ea156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1283495770712440, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
+  player: {fileID: 1771050792716318, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
   cursorTexture: {fileID: 2800000, guid: e520e03742167f1498d539518fc6aa12, type: 3}
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
