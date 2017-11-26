@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
 		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
 		pickaxe = goPickaxe.GetComponent<Pickaxe>();
 
-		goPickaxe.active = false;
+		goPickaxe.SetActive(false);
 
 		if (gameObject.tag == "team1") {
 			teamRed = true;
@@ -122,12 +122,12 @@ public class PlayerController : MonoBehaviour {
         }
 		if (movement) {
 			if (Input.GetKeyDown(KeyCode.Alpha1)) {
-				goPistol.active = true;
-				goPickaxe.active = false;
+				goPistol.SetActive(true);
+				goPickaxe.SetActive(false);
 			}
 			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-				goPickaxe.active =true;
-				goPistol.active =false;
+				goPickaxe.SetActive(true);
+				goPistol.SetActive(false);
 			} 
 		}
 	}
