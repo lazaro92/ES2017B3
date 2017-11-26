@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 		// Obtenim el component animador
 		anim = GetComponent<Animator>();
 		spr = GetComponent<SpriteRenderer>();
-		//Arm 
+		//Arm
 		arm = transform.Find("Arm").gameObject;
 		rotation = arm.GetComponent<ArmRotation>();
 
@@ -128,7 +128,13 @@ public class PlayerController : MonoBehaviour {
 			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
 				goPickaxe.SetActive(true);
 				goPistol.SetActive(false);
-			} 
+			}
+		}
+		//Pause
+		if (Input.GetKeyDown ("space")) {
+			rotation.setEnabledRotation (false);
+			pistol.setEnabledShoot(false);
+			pistol.setEnabledShoot (false);
 		}
 	}
 
@@ -167,7 +173,7 @@ public class PlayerController : MonoBehaviour {
 			transform.localScale = new Vector3(1f, 1f, 1f);
 			// Canviem la posició del HUD per veures bé
 			HUD_player.transform.localScale = new Vector3 (0.03f, 0.03f, 0.03f);
-			//Arm 
+			//Arm
 			rotation.flip (h);
 			deactivateArm();
 
@@ -179,7 +185,7 @@ public class PlayerController : MonoBehaviour {
 			transform.localScale = new Vector3(-1f, 1f, 1f);
 			// Canviem la posició del HUD per veures bé
 			HUD_player.transform.localScale = new Vector3 (-0.03f, 0.03f, 0.03f);
-			//Arm 
+			//Arm
 			rotation.flip (h);
 			deactivateArm();
 		}
@@ -189,7 +195,7 @@ public class PlayerController : MonoBehaviour {
 				activateArm ();
 			}
 		}
-			
+
 		if (jump)
 		{
 			//Para que cancele la velocidad vertical (controlamos el impulso)
@@ -198,7 +204,7 @@ public class PlayerController : MonoBehaviour {
 			jump = false;
 			soundManager.PlaySound("jump");
 		}
-			
+
 	}
 
 	// Torna a sortir el personatge al mateix lloc si sortim de l'escena.
@@ -241,7 +247,7 @@ public class PlayerController : MonoBehaviour {
 			spr.color = color;
 			rotation.colorDamage();
 			StartCoroutine("waitSecondsHealth");
-			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restem la barra de vida 
+			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restem la barra de vida
 		} else {
 			this.health = 0;
 			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restema la barra de vida
@@ -257,7 +263,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void selectWeapon(KeyCode key) {
-		
+
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
@@ -266,7 +272,7 @@ public class PlayerController : MonoBehaviour {
         Destroy(this.gameObject);
 	}
 
-	// Espera 1 segons 
+	// Espera 1 segons
 	IEnumerator waitSecondsHealth(){
 		yield return new WaitForSeconds(0.4f);
 		spr.color = Color.white;
@@ -294,6 +300,5 @@ public class PlayerController : MonoBehaviour {
 		pistol.setEnabledShoot (true);
 		arm.SetActive (true);
 	}
-		
-}
 
+}
