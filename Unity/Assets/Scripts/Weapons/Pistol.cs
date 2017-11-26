@@ -94,6 +94,7 @@ public class Pistol : MonoBehaviour{
 				}
 			}
         }
+        soundManager.PlaySound("shoot");
     }
 
     //Function to define less damage when distance is longer.

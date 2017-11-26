@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 				jump = true;
 				doubleJump = false;
 			}
-		}
+        }
 		if (movement) {
 			if (Input.GetKeyDown(KeyCode.Alpha1)) {
 				goPistol.active = true;
@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour {
 			rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
 			rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
 			jump = false;
+			soundManager.PlaySound("jump");
 		}
 			
 	}
@@ -232,6 +233,7 @@ public class PlayerController : MonoBehaviour {
             GameStart.deleteChicken(this.gameObject);
 			StartCoroutine("waitSecondsDead");
 		}
+		soundManager.PlaySound("damage");
 	}
 
 	public void selectWeapon(KeyCode key) {

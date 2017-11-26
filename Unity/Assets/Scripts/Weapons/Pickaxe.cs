@@ -60,6 +60,7 @@ public class Pickaxe : MonoBehaviour{
 					timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
 					GameObject objectScene = hit.transform.gameObject;
 					Destroy (objectScene); //TODO: Here is the destroy of the object Alvaro
+					soundManager.PlaySound("dig");
 				}	
 			}
 		}
