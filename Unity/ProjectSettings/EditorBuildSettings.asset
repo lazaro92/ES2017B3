@@ -9,20 +9,20 @@ EditorBuildSettings:
     path: 
     guid: a91efa571b99649f3b836a349784c6f7
   - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: 78cbab8fd941d457897496eab9cb465f
+  - enabled: 1
     path: Assets/Scenes/CreditsScene.unity
     guid: f403dad06e7644ed5949c967f3152d24
-  - enabled: 1
-    path: Assets/Scenes/LobbyScene.unity
-    guid: 5a164222d364f470cb673bd6850066ed
   - enabled: 1
     path: Assets/Scenes/SettingScene.unity
     guid: 0e2ce92a464c348f993ec285242e4e54
   - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
-    guid: 78cbab8fd941d457897496eab9cb465f
-  - enabled: 1
-    path: Assets/Scenes/FinalScene.unity
-    guid: 1f021bacee13b124aa5ce28cddfd6bf9
+    path: Assets/Scenes/LobbyScene.unity
+    guid: 5a164222d364f470cb673bd6850066ed
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: b42ad48fb1b1f4e8cb70b4ae38f022cf
+  - enabled: 1
+    path: Assets/Scenes/FinalScene.unity
+    guid: 1f021bacee13b124aa5ce28cddfd6bf9

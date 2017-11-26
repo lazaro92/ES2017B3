@@ -23,7 +23,8 @@ public class MenuObject : MonoBehaviour {
 	}
 
 	public void ExitGame(){
-		Application.Quit ();
+		Debug.Log("Exit");
+		Application.Quit();
 	}
 
 	// Change cursor
