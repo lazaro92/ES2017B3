@@ -233,6 +233,8 @@ public class PlayerController : MonoBehaviour {
  +	* Decrease health of the player
  +	*/
 	public void decreaseHealth(int health){
+		GameStart.points[GameStart.currentTeam] += health;
+
 		if (this.health > health) {
 			this.health -= health;
 			Color color = new Color (236/255f, 137/255f, 137/255f);
