@@ -10,7 +10,7 @@ public class Pause : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		canvas = GetComponent<Canvas> ();
-		canvas.enabled = false;
+		canvas.enabled = false; // Comença desactivat
 	}
 
 	// Update is called once per frame
@@ -18,7 +18,7 @@ public class Pause : MonoBehaviour {
 		if (Input.GetKeyDown ("space")) {
 			active = !active;
 			canvas.enabled = active; // Activació canvas
-			Time.timeScale = (active) ? 0 : 1f; // Bloquegem el joc 
+			Time.timeScale = (active) ? 0 : 1f; // Bloquegem el joc si és 0 tot bloquejat sino 1 desbloqueig
 		}
 	}
 }
