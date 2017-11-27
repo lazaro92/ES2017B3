@@ -44,12 +44,25 @@ public class Explodable : MonoBehaviour
                 frag.SetActive(true);
             }
         }
-        //if fragments exist destroy the original
-        if (fragments.Count > 0)
-        {
-            Destroy(gameObject);
-        }
+
+		this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0, 0, 0, 0f);//setting "hide" object
+		StartCoroutine(waitSecondsDestroy());
+
     }
+
+	/*
+	 * wait a minute and destroy gameObject
+	*/
+	private IEnumerator waitSecondsDestroy(){
+		yield return new WaitForSeconds(1.5f);
+		gameObject.GetComponent<Collider2D> ().enabled = false;//disabled collision
+		foreach (GameObject frag in fragments)
+		{
+			frag.transform.parent = null;
+			frag.SetActive(false);
+		}
+	}
+
     /// <summary>
     /// Creates fragments and then disables them
     /// </summary>

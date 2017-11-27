@@ -56,10 +56,16 @@ public class Pickaxe : MonoBehaviour{
 					PlayerController player = hitPlayer.GetComponent<PlayerController> ();
 					player.decreaseHealth (damage);
 				} else {
-					//Effect();
 					timeToSpawnEffect = Time.time + 1 / effectSpawnRate;
-					GameObject objectScene = hit.transform.gameObject;
-					Destroy (objectScene); //TODO: Here is the destroy of the object Alvaro
+					GameObject sceneObject = hit.transform.gameObject;
+					if (sceneObject.name == "block") {
+						Explodable _explo = sceneObject.GetComponent<Explodable> ();
+						_explo.explode ();
+					} else if (sceneObject.transform.Find ("block") != null) {
+						GameObject impactObject = sceneObject.transform.Find ("block").gameObject;
+						Explodable _explo = impactObject.GetComponent<Explodable> ();
+						_explo.explode ();
+					}
 					soundManager.PlaySound("dig");
 				}	
 			}
