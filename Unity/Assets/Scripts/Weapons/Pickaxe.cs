@@ -7,7 +7,7 @@ public class Pickaxe : MonoBehaviour{
 	//Variables
 	private int damage = Globals.PICKAXE_DAMAGE; //Damage is for the damage of the player that hit it.
 	public LayerMask wantToHit; //Is the layers that we want to hit
-	private float digRange = 8f;//0.8f; //Range that player can dig and damage
+	private float digRange = 0.8f; //Range that player can dig and damage
 
 	public Transform DirtDugPrefab;
 	float timeToSpawnEffect = 0;
@@ -46,7 +46,7 @@ public class Pickaxe : MonoBehaviour{
 		Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.blue);
 		Debug.Log ("Here is the distance: " + hit.distance);
 		Debug.Log ("Here is the DigRange: " + digRange);
-		if (hit.collider != null )//&& hit.distance <= digRange)
+		if (hit.collider != null && hit.distance <= digRange)
 		{
 			if (Time.time >= timeToSpawnEffect){
 				Debug.DrawLine(firePointPosition, hit.point, Color.red);

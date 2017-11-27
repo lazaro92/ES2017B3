@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour {
 			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restema la barra de vida
 			dead = true;
 			deactivateArm();
-			Destroy (this.goPistol); //TODO: Albert
+			Destroy (this.goPistol);
 			Destroy (this.goPickaxe);
 			Destroy (this.arm);
             GameStart.deleteChicken(this.gameObject);
@@ -286,7 +286,6 @@ public class PlayerController : MonoBehaviour {
 	 */
 	private void deactivateArm(){
 		rotation.setEnabledRotation (false);
-		//TODO Albert
 		pistol.setEnabledShoot (false);
 		pickaxe.setEnabledShoot (false);
 		arm.SetActive (false);
@@ -297,7 +296,7 @@ public class PlayerController : MonoBehaviour {
 	private void activateArm(){
 		rotation.setEnabledRotation (true);
 		pistol.setEnabledShoot(true);
-		pistol.setEnabledShoot (true);
+		pickaxe.setEnabledShoot (true);
 		arm.SetActive (true);
 	}
 
