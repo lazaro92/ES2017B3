@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	// Control moviment
 	private bool movement = false;
 	// Health
-	public float health = Globals.HEALTHVALUE;
+	public float health = Globals.HEALTH;
 	// Canviar el color del personatge
 	private SpriteRenderer spr;
 
@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour {
  +	* Decrease health of the player
  +	*/
 	public void decreaseHealth(int health){
-		GameStart.points[GameStart.currentTeam] += health;
+		Globals.accPoints += health;
 
 		if (this.health > health) {
 			this.health -= health;
@@ -247,10 +247,10 @@ public class PlayerController : MonoBehaviour {
 			spr.color = color;
 			rotation.colorDamage();
 			StartCoroutine("waitSecondsHealth");
-			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restem la barra de vida
+			healthBar.fillAmount = this.health / Globals.HEALTH; // Restem la barra de vida
 		} else {
 			this.health = 0;
-			healthBar.fillAmount = this.health / Globals.HEALTHVALUE; // Restema la barra de vida
+			healthBar.fillAmount = this.health / Globals.HEALTH; // Restema la barra de vida
 			dead = true;
 			deactivateArm();
 			Destroy (this.goPistol);
