@@ -116,6 +116,12 @@ public class GameStart : MonoBehaviour
 
 	}
 
+	public static float pointProportion(int team)
+	{
+		float proportion = (float) points[team] / Globals.MAX_POINTS;
+		return proportion;
+	}
+
 	// Change cursor
 	void OnMouseEnter()
 	{

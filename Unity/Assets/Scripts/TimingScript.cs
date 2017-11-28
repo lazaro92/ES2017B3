@@ -18,8 +18,10 @@ public class TimingScript : MonoBehaviour {
 		txtTime = GameObject.Find("txtTime").GetComponent<Text>();
 		bar1 = GameObject.Find("team1_bar").GetComponent<Image>();
 		bar2 = GameObject.Find("team2_bar").GetComponent<Image>();
-		bar1.fillAmount = 0;
+		bar1.fillAmount = 0; 
 		bar2.fillAmount = 0;
+
+		 
 	}
 	
 	// Update is called once per frame
@@ -29,10 +31,10 @@ public class TimingScript : MonoBehaviour {
 		if (ENDTIME > varTime) {
             varTime = 5;
 			GameStart.points[GameStart.currentTeam] += Globals.accPoints;
-			if(GameStart.currentTeam == 0)
-				bar1.fillAmount = GameStart.points[GameStart.currentTeam] / Globals.MAX_POINTS;
-			else
-				bar2.fillAmount = GameStart.points[GameStart.currentTeam] / Globals.MAX_POINTS;
+
+			bar1.fillAmount = GameStart.pointProportion(0);
+
+			bar2.fillAmount = GameStart.pointProportion(1);
 
 			Globals.accPoints = 0;
 			Globals.changeTurn = true;
