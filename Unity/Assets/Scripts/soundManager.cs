@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class soundManager : MonoBehaviour {
 
-	public static AudioClip damageSound, shootSound, jumpSound, digSound;
+	public static AudioClip damageSound, shootSound, jumpSound, digSound, drySound;
 	
 	static AudioSource audioSrc;
 
@@ -17,6 +17,7 @@ public class soundManager : MonoBehaviour {
 		shootSound = Resources.Load<AudioClip>("Sounds/shoot");
 		jumpSound = Resources.Load<AudioClip>("Sounds/jump");
 		digSound = Resources.Load<AudioClip>("Sounds/dig");
+		drySound = Resources.Load<AudioClip>("Sounds/dry");
 	}
 	
 	// Update is called once per frame
@@ -40,6 +41,9 @@ public class soundManager : MonoBehaviour {
 			case "dig":
                 audioSrc.PlayOneShot(digSound);
                 break;
+			case "dry":
+				audioSrc.PlayOneShot(drySound);
+				break;
 		}
 	}
 }

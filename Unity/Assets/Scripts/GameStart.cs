@@ -23,7 +23,6 @@ public class GameStart : MonoBehaviour
 
 	public static List<LinkedList<GameObject>> squads; //array of linkedlists, one per team
 	public static LinkedListNode<GameObject>[] currentChickens; // last chicken of every team who played
-	public static List<int> points; //points for every team
 
 	LinkedListNode<GameObject> nextChicken;
 
@@ -40,14 +39,13 @@ public class GameStart : MonoBehaviour
 		chickensPerTeam = new int[] { Globals.numChickens, Globals.numChickens };
 		currentChickens = new LinkedListNode<GameObject>[numTeams];
 		squads = new List<LinkedList<GameObject>>();
-		points = new List<int>(numTeams);
 		for (var team = 0; team < numTeams; team++)
 		{ // for every team
-			points.Add(0);
+			Globals.points.Add(0);
 			squads.Add(new LinkedList<GameObject>());
 			player.gameObject.tag = "team" + team;
 			for (var i = 0; i < chickensPerTeam[team]; i++) // add the amount of chickens necessary
-				squads[team].AddFirst((GameObject)Instantiate(player, new Vector3(-7.82f + i, -1.0f, 0), Quaternion.identity));
+				squads[team].AddFirst((GameObject)Instantiate(player, new Vector3( (team == 0)? -7.82f +i : 11 + i , -1.0f, 0), Quaternion.identity));
 
 			currentChickens[team] = squads[team].First;
 		}
@@ -65,7 +63,7 @@ public class GameStart : MonoBehaviour
 	{
 		for (var team = 0; team < numTeams; team++)
 		{
-			if (points[team] > Globals.MAX_POINTS)
+			if (Globals.points[team] > Globals.MAX_POINTS)
 			{
 				SceneManager.LoadScene("FinalScene");
 			}
@@ -118,7 +116,7 @@ public class GameStart : MonoBehaviour
 
 	public static float pointProportion(int team)
 	{
-		float proportion = (float) points[team] / Globals.MAX_POINTS;
+		float proportion = (float) Globals.points[team] / Globals.MAX_POINTS;
 		return proportion;
 	}
 

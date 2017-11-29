@@ -35,42 +35,26 @@ public class Pistol : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
-        //If there is a sigle shot
-        if (fireRate == 0)
-        {
-				
-            //Check if fireButton is pressed
-            if (Input.GetButtonDown("Fire1") && enabledShoot)
-            {
-				if (magazine > 0) {
-					Shoot ();
-					if (!infiniteAmmo) {
-						magazine--;
-					}
-				} else {
-					Debug.Log("There are no bullets in magazine");
-				}
+		//Check if fireButton is pressed
+		if (Input.GetButtonDown("Fire1") && enabledShoot)
+		{
+			if (magazine > 0 && Globals.remainingShots > 0) {
+				Shoot ();
 
-            }
-        }
-        //If firerate is diferent than 0 we do a burst shoot
-        else
-        {
-            if (Input.GetButtonDown("Fire1") & Time.time > timeToFire && enabledShoot)
-            {
-				if (magazine > 0) {
-					
-					timeToFire = Time.time + 1 / fireRate;
-					Shoot ();
-					if (!infiniteAmmo) {
-						magazine--;
-					}
+				magazine--;
+				Globals.remainingShots--;
 
-				} else {
-					Debug.Log("There are no bullets in magazine");
-				}
-            }
-        }
+				if (Globals.remainingShots == 0)
+					Globals.finishTurn = true;
+
+				if (infiniteAmmo) 
+					magazine++;
+
+			} else {
+				Debug.Log("There are no bullets in magazine or the turn's shots are overrr");
+				soundManager.PlaySound("dry"); 
+			}
+		}
     }
 
     //Function Shoot

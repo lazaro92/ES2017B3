@@ -14,29 +14,34 @@ public class TimingScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		varTime = 5;
+		varTime = Globals.TIME_PER_TURN;
 		txtTime = GameObject.Find("txtTime").GetComponent<Text>();
 		bar1 = GameObject.Find("team1_bar").GetComponent<Image>();
 		bar2 = GameObject.Find("team2_bar").GetComponent<Image>();
 		bar1.fillAmount = 0; 
 		bar2.fillAmount = 0;
-
-		 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		varTime -= Time.deltaTime;
 		txtTime.text = ((int) varTime).ToString();
+		if (Globals.finishTurn)
+		{
+			Globals.finishTurn = false;
+			varTime = Globals.TIME_PER_TURN / 5;
+		}
 		if (ENDTIME > varTime) {
-            varTime = 5;
-			GameStart.points[GameStart.currentTeam] += Globals.accPoints;
+            varTime = Globals.TIME_PER_TURN;
+			Globals.points[GameStart.currentTeam] += Globals.accPoints;
 
-			bar1.fillAmount = GameStart.pointProportion(0);
+			bar1.fillAmount = GameStart.pointProportion(1);
 
-			bar2.fillAmount = GameStart.pointProportion(1);
+			bar2.fillAmount = GameStart.pointProportion(0);
 
 			Globals.accPoints = 0;
+			Globals.remainingShots = Globals.SHOTS_PER_TURN;
+
 			Globals.changeTurn = true;
 		}
 	}
