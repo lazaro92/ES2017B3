@@ -45,7 +45,7 @@ public class Pistol : MonoBehaviour{
 				Globals.remainingShots--;
 
 				if (Globals.remainingShots == 0)
-					Globals.finishTurn = true;
+					Globals.skipTurn = true;
 
 				if (infiniteAmmo) 
 					magazine++;

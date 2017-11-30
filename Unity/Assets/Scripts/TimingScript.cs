@@ -11,10 +11,12 @@ public class TimingScript : MonoBehaviour {
 
 	private Text txtTime;
 	Image bar1, bar2;
+	bool skipTurn;
 
 	// Use this for initialization
 	void Start () {
 		varTime = Globals.TIME_PER_TURN;
+		skipTurn = Globals.skipTurn;
 		txtTime = GameObject.Find("txtTime").GetComponent<Text>();
 		bar1 = GameObject.Find("team1_bar").GetComponent<Image>();
 		bar2 = GameObject.Find("team2_bar").GetComponent<Image>();
@@ -26,11 +28,13 @@ public class TimingScript : MonoBehaviour {
 	void Update () {
 		varTime -= Time.deltaTime;
 		txtTime.text = ((int) varTime).ToString();
-		if (Globals.finishTurn)
+		//skipTurn = Globals.skipTurn;
+		/*if (skipTurn)
 		{
-			Globals.finishTurn = false;
-			varTime = Globals.TIME_PER_TURN / 5;
-		}
+			skipTurn = false;
+			Globals.skipTurn = false;
+			varTime = 2;
+		}*/
 		if (ENDTIME > varTime) {
             varTime = Globals.TIME_PER_TURN;
 			Globals.points[GameStart.currentTeam] += Globals.accPoints;

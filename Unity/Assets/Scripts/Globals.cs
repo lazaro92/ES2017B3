@@ -6,7 +6,7 @@ public class Globals : MonoBehaviour {
 
 	//CONSTANTS
 	public static int HEALTH = 100;//change if needed
-	public const int TIME_PER_TURN = 10;
+	public static int TIME_PER_TURN = 10;
 	//Pistol
 	public const int PISTOL_DAMAGE = 50;
 	public const int PISTOL_AMMO = 10; //If limitedAmmo is true
@@ -25,12 +25,12 @@ public class Globals : MonoBehaviour {
 	//POINTS
 
 	public static List<int> points = new List<int>();
-	
+
 
 	//TURN CONTROL
-	internal static bool changeTurn = false;
-	internal static bool finishTurn = false;
-	internal static int accPoints = 0;
-	internal static int remainingShots = SHOTS_PER_TURN;
+	public static bool changeTurn = false;
+	public static bool skipTurn = false;
+	public static int accPoints = 0;
+	public static int remainingShots = SHOTS_PER_TURN;
 
 }

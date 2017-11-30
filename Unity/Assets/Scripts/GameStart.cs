@@ -68,7 +68,7 @@ public class GameStart : MonoBehaviour
 				SceneManager.LoadScene("FinalScene");
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.N) || Globals.changeTurn) //Code to change turn
+		if (Globals.changeTurn) //Code to change turn
 		{
 			Globals.changeTurn = false; // deactivate flag
 
