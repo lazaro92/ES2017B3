@@ -136,6 +136,11 @@ public class PlayerController : MonoBehaviour {
 			pistol.setEnabledShoot(false);
 			pistol.setEnabledShoot (false);
 		}
+
+		if (rb2d.position.y < -8 && !dead){
+			killChicken();
+			soundManager.PlaySound("damage");
+		}
 	}
 
 	// Evitem problemes amb fisiques (funciona per frames)
@@ -251,15 +256,19 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			this.health = 0;
 			healthBar.fillAmount = this.health / Globals.HEALTH; // Restema la barra de vida
-			dead = true;
-			deactivateArm();
-			Destroy (this.goPistol);
-			Destroy (this.goPickaxe);
-			Destroy (this.arm);
-            GameStart.deleteChicken(this.gameObject);
-			StartCoroutine("waitSecondsDead");
+			killChicken();
 		}
 		soundManager.PlaySound("damage");
+	}
+
+	public void killChicken(){
+		dead = true;
+        deactivateArm();
+        Destroy(this.goPistol);
+        Destroy(this.goPickaxe);
+        Destroy(this.arm);
+        GameStart.deleteChicken(this.gameObject);
+        StartCoroutine("waitSecondsDead");
 	}
 
 	public void selectWeapon(KeyCode key) {
