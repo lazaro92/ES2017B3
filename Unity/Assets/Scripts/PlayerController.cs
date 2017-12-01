@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 	// La força en el personatge horitzontalment perque es mogui
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	// Control moviment
 	private bool movement = false;
 	// Health
-	public int health = Globals.HEALTHVALUE;
+	public float health = Globals.HEALTH;
 	// Canviar el color del personatge
 	private SpriteRenderer spr;
 
@@ -37,9 +38,20 @@ public class PlayerController : MonoBehaviour {
 	private GameObject arm;//Persistent
 	private ArmRotation rotation;
 
+	//TODO Albert
 	private GameObject goPistol;
 	private Pistol pistol;
 
+	private GameObject goPickaxe;
+	private Pickaxe pickaxe;
+
+	// Canvas HUD i text
+	private Canvas HUD_player;
+	private Text txtMagazine;
+
+	[Header("Unity Stuff")]
+	// Asignar la barra de vida al player
+	public Image healthBar;
 
 	// Use this for initialization
 	void Start () {
@@ -48,12 +60,17 @@ public class PlayerController : MonoBehaviour {
 		// Obtenim el component animador
 		anim = GetComponent<Animator>();
 		spr = GetComponent<SpriteRenderer>();
-		//Arm 
+		//Arm
 		arm = transform.Find("Arm").gameObject;
 		rotation = arm.GetComponent<ArmRotation>();
 
 		goPistol = transform.Find ("Arm/Pistol").gameObject;
 		pistol = goPistol.GetComponent<Pistol>();
+
+		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+		pickaxe = goPickaxe.GetComponent<Pickaxe>();
+
+		goPickaxe.SetActive(false);
 
 		if (gameObject.tag == "team1") {
 			teamRed = true;
@@ -65,6 +82,16 @@ public class PlayerController : MonoBehaviour {
 
 	// Problemes amb fisiques
 	void Update () {
+		// Munició per cada pollo
+		if (pistol.getInfiniteAmmo () != true) {
+			// Mirem la munició
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString ();
+			//this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "Bullets: " + pistol.getMagazine ().ToString ();
+		} else {
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: ∞";
+		}
+		// HUD_player
+		HUD_player = this.GetComponentInChildren<Canvas>();
 		// Assignem la velocitat del personatge. Buscant el valor positiu
 		anim.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x));
 		// Assignem si toquem el terra
@@ -92,8 +119,28 @@ public class PlayerController : MonoBehaviour {
 				jump = true;
 				doubleJump = false;
 			}
+        }
+		if (movement) {
+			if (Input.GetKeyDown(KeyCode.Alpha1)) {
+				goPistol.SetActive(true);
+				goPickaxe.SetActive(false);
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				goPickaxe.SetActive(true);
+				goPistol.SetActive(false);
+			}
+		}
+		//Pause
+		if (Input.GetKeyDown ("space")) {
+			rotation.setEnabledRotation (false);
+			pistol.setEnabledShoot(false);
+			pistol.setEnabledShoot (false);
 		}
 
+		if (rb2d.position.y < -8 && !dead){
+			killChicken();
+			soundManager.PlaySound("damage");
+		}
 	}
 
 	// Evitem problemes amb fisiques (funciona per frames)
@@ -129,7 +176,9 @@ public class PlayerController : MonoBehaviour {
 		{
 			// Assignem nou vector
 			transform.localScale = new Vector3(1f, 1f, 1f);
-			//Arm 
+			// Canviem la posició del HUD per veures bé
+			HUD_player.transform.localScale = new Vector3 (0.03f, 0.03f, 0.03f);
+			//Arm
 			rotation.flip (h);
 			deactivateArm();
 
@@ -139,7 +188,9 @@ public class PlayerController : MonoBehaviour {
 		if (h < -0.1f)
 		{
 			transform.localScale = new Vector3(-1f, 1f, 1f);
-			//Arm 
+			// Canviem la posició del HUD per veures bé
+			HUD_player.transform.localScale = new Vector3 (-0.03f, 0.03f, 0.03f);
+			//Arm
 			rotation.flip (h);
 			deactivateArm();
 		}
@@ -149,15 +200,16 @@ public class PlayerController : MonoBehaviour {
 				activateArm ();
 			}
 		}
-			
+
 		if (jump)
 		{
 			//Para que cancele la velocidad vertical (controlamos el impulso)
 			rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
 			rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
 			jump = false;
+			soundManager.PlaySound("jump");
 		}
-			
+
 	}
 
 	// Torna a sortir el personatge al mateix lloc si sortim de l'escena.
@@ -179,28 +231,48 @@ public class PlayerController : MonoBehaviour {
 
             goPistol = transform.Find("Arm/Pistol").gameObject;
             pistol = goPistol.GetComponent<Pistol>();
+
+			goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+			pickaxe = goPickaxe.GetComponent<Pickaxe>();
         }
 		this.rotation.setEnabledRotation(movement);
-		this.pistol.setEnabledShoot (movement);
+		this.pistol.setEnabledShoot (movement);//TODO Albert
+		this.pickaxe.setEnabledShoot (movement);
 	}
 
 	/*
  +	* Decrease health of the player
  +	*/
 	public void decreaseHealth(int health){
+		Globals.accPoints += health;
+
 		if (this.health > health) {
 			this.health -= health;
-			//spr.color = Color.red;
-			//StartCoroutine("waitSecondsHealth");
+			Color color = new Color (236/255f, 137/255f, 137/255f);
+			spr.color = color;
+			rotation.colorDamage();
+			StartCoroutine("waitSecondsHealth");
+			healthBar.fillAmount = this.health / Globals.HEALTH; // Restem la barra de vida
 		} else {
 			this.health = 0;
-			dead = true;
-			deactivateArm();
-			Destroy (this.goPistol);
-			Destroy (this.arm);
-            GameStart.deleteChicken(this.gameObject);
-			StartCoroutine("waitSecondsDead");
+			healthBar.fillAmount = this.health / Globals.HEALTH; // Restema la barra de vida
+			killChicken();
 		}
+		soundManager.PlaySound("damage");
+	}
+
+	public void killChicken(){
+		dead = true;
+        deactivateArm();
+        Destroy(this.goPistol);
+        Destroy(this.goPickaxe);
+        Destroy(this.arm);
+        GameStart.deleteChicken(this.gameObject);
+        StartCoroutine("waitSecondsDead");
+	}
+
+	public void selectWeapon(KeyCode key) {
+
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
@@ -209,10 +281,13 @@ public class PlayerController : MonoBehaviour {
         Destroy(this.gameObject);
 	}
 
-	// Espera 1 segons 
+	// Espera 1 segons
 	IEnumerator waitSecondsHealth(){
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.4f);
 		spr.color = Color.white;
+		if (rotation != null) {
+			rotation.resetColor();
+		}
 	}
 
 	/**
@@ -221,6 +296,7 @@ public class PlayerController : MonoBehaviour {
 	private void deactivateArm(){
 		rotation.setEnabledRotation (false);
 		pistol.setEnabledShoot (false);
+		pickaxe.setEnabledShoot (false);
 		arm.SetActive (false);
 	}
 	/**
@@ -229,8 +305,8 @@ public class PlayerController : MonoBehaviour {
 	private void activateArm(){
 		rotation.setEnabledRotation (true);
 		pistol.setEnabledShoot(true);
+		pickaxe.setEnabledShoot (true);
 		arm.SetActive (true);
 	}
-		
-}
 
+}

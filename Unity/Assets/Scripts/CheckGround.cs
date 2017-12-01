@@ -29,14 +29,8 @@ public class CheckGround : MonoBehaviour {
 	void OnCollisionStay2D(Collision2D collision)
 	{
 		// Si te aquesta etiqueta doncs es terra
-		if(collision.gameObject.tag == "Ground")
+		if (collision.gameObject.name == "block")
 		{
-			player.grounded = true;
-		}
-
-		if (collision.gameObject.tag == "Platform")
-		{
-			player.transform.parent = collision.transform;
 			player.grounded = true;
 		}
 
@@ -46,14 +40,8 @@ public class CheckGround : MonoBehaviour {
 	void OnCollisionExit2D(Collision2D collision)
 	{
 		// Sino choquem contra l'etiqueta no es ground
-		if (collision.gameObject.tag == "Ground")
+		if (collision.gameObject.name == "block")
 		{
-			player.grounded = false;
-		}
-
-		if (collision.gameObject.tag == "Platform")
-		{
-			player.transform.parent = null;
 			player.grounded = false;
 		}
 	}

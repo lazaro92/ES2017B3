@@ -52,9 +52,9 @@ public class LobbyObject : MonoBehaviour {
 	 * To set life Chicken into globals variables 
 	 */
 	public void setHealthToGamePlay(string action){
-		int value = Globals.HEALTHVALUE;
-		int total = (action.Equals ("plus")) ? Globals.health + value : Globals.health - value;
-		Globals.health = total;
+		int value = Globals.HEALTH;
+		int total = (action.Equals ("plus")) ? Globals.HEALTH + value : Globals.HEALTH - value;
+		Globals.HEALTH = total;
 		healthInputField.text = total.ToString ();
 	}
 
@@ -64,7 +64,7 @@ public class LobbyObject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		healthInputField.text = Globals.health.ToString ();
+		healthInputField.text = Globals.HEALTH.ToString ();
 		for(int i = Globals.numChickens; i <= 9; i++) chickens[i].SetActive(false);//UI chicken image hide
 		for(int i = Globals.numFlags; i <= 9; i++) flags[i].SetActive(false);//UI flags image hide
 		chickenSlider.value = Globals.numChickens;
