@@ -45976,7 +45976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 1714047480404516, guid: ffc7123f85a4df843886aafea691bc33, type: 2}
-  minCamPos: {x: -1.39, y: 0}
+  minCamPos: {x: -1.39, y: -1.42}
   maxCamPos: {x: 16.51, y: 0}
   smoothTime: 0.15
 --- !u!1 &1309323966
