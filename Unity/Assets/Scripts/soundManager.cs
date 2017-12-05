@@ -7,6 +7,7 @@ public class soundManager : MonoBehaviour {
 	public static AudioClip damageSound, shootSound, jumpSound, digSound, drySound;
 	
 	static AudioSource audioSrc;
+	private static bool enabledSound;
 
 	// Use this for initialization
 	void Start () 
@@ -18,6 +19,7 @@ public class soundManager : MonoBehaviour {
 		jumpSound = Resources.Load<AudioClip>("Sounds/jump");
 		digSound = Resources.Load<AudioClip>("Sounds/dig");
 		drySound = Resources.Load<AudioClip>("Sounds/dry");
+		enabledSound = true;
 	}
 	
 	// Update is called once per frame
@@ -27,6 +29,9 @@ public class soundManager : MonoBehaviour {
 
 	public static void PlaySound(string clip)
 	{
+		if (!enabledSound)
+			return;
+
 		switch(clip)
 		{
 			case "damage":
@@ -45,5 +50,10 @@ public class soundManager : MonoBehaviour {
 				audioSrc.PlayOneShot(drySound);
 				break;
 		}
+	}
+
+	public void switchSound ()
+	{
+		enabledSound ^= true;
 	}
 }
