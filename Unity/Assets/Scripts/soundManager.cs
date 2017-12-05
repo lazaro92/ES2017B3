@@ -12,6 +12,7 @@ public class soundManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		Debug.Log ("Inicialitzat el so");
 		audioSrc = GetComponent<AudioSource>();
 
 		damageSound = Resources.Load<AudioClip>("Sounds/damage");
@@ -55,5 +56,6 @@ public class soundManager : MonoBehaviour {
 	public void switchSound ()
 	{
 		enabledSound ^= true;
+		Debug.Log ("Canvi de so: " + enabledSound);
 	}
 }
