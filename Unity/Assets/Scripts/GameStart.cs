@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameStart : MonoBehaviour
 
 	// current chicken to move (index of chickens)
 	private int teamCounter;
-	public static int currentTeam;
+	public static int currentTeam, lastTeam;
 	// Control cursor
 	public Texture2D cursorTexture;
 	public CursorMode cursorMode = CursorMode.Auto;
@@ -29,6 +30,8 @@ public class GameStart : MonoBehaviour
 
 	private PlayerController playerController;
 	private CameraFollow camFollow;
+
+	private Canvas cnvCurrentTeam;
 
 
 	// Use this for initialization
@@ -54,6 +57,10 @@ public class GameStart : MonoBehaviour
 
 		camFollow = Camera.main.GetComponent<CameraFollow>();
 
+		GameObject goCurrentTeam = GameObject.Find("TeamTurnInfo");
+		cnvCurrentTeam = goCurrentTeam.GetComponent<Canvas>();
+
+		lastTeam = currentTeam;
 		//Cursor
 		OnMouseEnter();
 	}
@@ -76,6 +83,12 @@ public class GameStart : MonoBehaviour
 
 			currentTeam = ++teamCounter % numTeams; //get the current team
 
+			if (lastTeam != currentTeam){
+				lastTeam = currentTeam;
+                StartCoroutine(waitSecondsInformTeam(currentTeam));
+
+            }
+
 			nextChicken = currentChickens[currentTeam].Next ?? squads[currentTeam].First;
 
 			/* Assign the new chicken in play */
@@ -85,6 +98,31 @@ public class GameStart : MonoBehaviour
 
 			currentChickens[currentTeam] = nextChicken; //set the current chicken as the last chicken who played for this team
 		}
+	}
+
+	private IEnumerator waitSecondsInformTeam(int team)
+    {
+		cnvCurrentTeam.enabled = true;
+
+		Transform temp = cnvCurrentTeam.transform.Find("txtTeam");
+		Text txtTeam = temp.GetComponent<Text>();
+
+		if (team == 0) {
+			txtTeam.text = "Blue Team Turn";
+		}
+		else {
+			txtTeam.text = "Red Team Turn";
+		}
+		Time.timeScale = 0.00001f;
+        
+		float pauseEndTime = Time.realtimeSinceStartup + 2;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
+
+		Time.timeScale = 1f;
+		cnvCurrentTeam.enabled = false;
 	}
 
 	public static void deleteChicken(GameObject chicken)
