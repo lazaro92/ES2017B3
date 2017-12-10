@@ -11,10 +11,21 @@ public class Globals : MonoBehaviour {
 	public const int PISTOL_DAMAGE = 50;
 	public const int PISTOL_AMMO = 10; //If limitedAmmo is true
 	public static int SHOTS_PER_TURN = 2;
+
 	
 	//Pickaxe
 	public const int PICKAXE_DAMAGE = 100;
-	
+
+	//GrenadeThrower
+	public const int GRENADE_THROW_AMMO = 3; //If limitedAmmo is true
+	public static int GRENADE_THROW_PER_TURN = 1;
+	public static float GRENADE_THROW_FORCE = 3f;
+
+	//Grenade
+	public const int GRENADE_DAMAGE = 50;
+	public const float GRENADE_DELAY = 3f;
+	public const float GRENADE_RADIUS = 1.2f;
+
 	//STATIC
 	public static int numChickens = 2; //initial chickens to gameplay
 	public static int numFlags = 2; //initial chickens to gameplay
@@ -32,5 +43,6 @@ public class Globals : MonoBehaviour {
 	public static bool skipTurn = false;
 	public static int accPoints = 0;
 	public static int remainingShots = SHOTS_PER_TURN;
+	public static int remainingGrenades = GRENADE_THROW_PER_TURN;
 
 }

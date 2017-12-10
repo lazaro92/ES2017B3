@@ -17,6 +17,10 @@ public class Pistol : MonoBehaviour{
     float timeToFire = 0;
     Transform firePoint;
 
+	//Granade
+//	public float throwForce = 2f;
+//	public GameObject grenadePrefab;
+
 	//Ammo
 	private bool infiniteAmmo = !Globals.limitedAmmo; //OJO Negado
 	private int magazine = Globals.PISTOL_AMMO;
@@ -40,7 +44,7 @@ public class Pistol : MonoBehaviour{
 		{
 			if (magazine > 0 && Globals.remainingShots > 0) {
 				Shoot ();
-
+//				ThrowGranade ();
 				magazine--;
 				Globals.remainingShots--;
 
@@ -113,4 +117,17 @@ public class Pistol : MonoBehaviour{
 	public bool getInfiniteAmmo(){
 		return infiniteAmmo;
 	}
+
+//	void ThrowGranade()
+//	{
+//		Debug.Log ("Tiro granada desde pistola");
+//		Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
+//		GameObject grenade = Instantiate (grenadePrefab,firePointPosition,transform.rotation);
+//		CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
+//		cam.setFollower (grenade);
+//		Rigidbody2D rb = grenade.GetComponent<Rigidbody2D> ();
+//		Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+//		rb.velocity = (mousePosition - firePointPosition) * 2;
+//	}
+
 }

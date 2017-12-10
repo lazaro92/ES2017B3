@@ -45,6 +45,7 @@ public class TimingScript : MonoBehaviour {
 
 			Globals.accPoints = 0;
 			Globals.remainingShots = Globals.SHOTS_PER_TURN;
+			Globals.remainingGrenades = Globals.GRENADE_THROW_PER_TURN;
 
 			Globals.changeTurn = true;
 		}

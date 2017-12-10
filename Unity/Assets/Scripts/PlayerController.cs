@@ -38,12 +38,14 @@ public class PlayerController : MonoBehaviour {
 	private GameObject arm;//Persistent
 	private ArmRotation rotation;
 
-	//TODO Albert
 	private GameObject goPistol;
 	private Pistol pistol;
 
 	private GameObject goPickaxe;
 	private Pickaxe pickaxe;
+
+	private GameObject goGrenadeThrower;
+	private GrenadeThrower grenadeThrower;
 
 	// Canvas HUD i text
 	private Canvas HUD_player;
@@ -70,10 +72,14 @@ public class PlayerController : MonoBehaviour {
 		goPistol = transform.Find ("Arm/Pistol").gameObject;
 		pistol = goPistol.GetComponent<Pistol>();
 
-		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject;
 		pickaxe = goPickaxe.GetComponent<Pickaxe>();
 
+		goGrenadeThrower = transform.Find ("Arm/GrenadeThrower").gameObject;
+		grenadeThrower = goGrenadeThrower.GetComponent<GrenadeThrower>();
+
 		goPickaxe.SetActive(false);
+		goGrenadeThrower.SetActive(false);
 
 		if (gameObject.tag == "team1") {
 			teamRed = true;
@@ -88,10 +94,10 @@ public class PlayerController : MonoBehaviour {
 		// Munició per cada pollo
 		if (pistol.getInfiniteAmmo () != true) {
 			// Mirem la munició
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString ();
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString () + "\nGrenades: " + grenadeThrower.getMagazine ().ToString();
 			//this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "Bullets: " + pistol.getMagazine ().ToString ();
 		} else {
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: ∞";
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Ammo: ∞";
 		}
 		// HUD_player
 		HUD_player = this.GetComponentInChildren<Canvas>();
@@ -127,17 +133,25 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.Alpha1)) {
 				goPistol.SetActive(true);
 				goPickaxe.SetActive(false);
+				goGrenadeThrower.SetActive(false);
 			}
 			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				goGrenadeThrower.SetActive(true);
+				goPickaxe.SetActive(false);
+				goPistol.SetActive(false);
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha3)) {
 				goPickaxe.SetActive(true);
 				goPistol.SetActive(false);
+				goGrenadeThrower.SetActive(false);
 			}
 		}
 		//Pause
 		if (Input.GetKeyDown ("space")) {
 			rotation.setEnabledRotation (false);
 			pistol.setEnabledShoot(false);
-			pistol.setEnabledShoot (false);
+			pickaxe.setEnabledShoot (false);
+			grenadeThrower.setEnabledShoot (false);
 		}
 
 		if (rb2d.position.y < -8 && !dead){
@@ -235,12 +249,16 @@ public class PlayerController : MonoBehaviour {
             goPistol = transform.Find("Arm/Pistol").gameObject;
             pistol = goPistol.GetComponent<Pistol>();
 
-			goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+			goPickaxe = transform.Find ("Arm/Pickaxe").gameObject;
 			pickaxe = goPickaxe.GetComponent<Pickaxe>();
+
+			goGrenadeThrower = transform.Find ("Arm/GrenadeThrower").gameObject;
+			grenadeThrower = goGrenadeThrower.GetComponent<GrenadeThrower>();
         }
 		this.rotation.setEnabledRotation(movement);
-		this.pistol.setEnabledShoot (movement);//TODO Albert
+		this.pistol.setEnabledShoot (movement);
 		this.pickaxe.setEnabledShoot (movement);
+		this.grenadeThrower.setEnabledShoot (movement);
 	}
 
 	/*
@@ -269,6 +287,7 @@ public class PlayerController : MonoBehaviour {
         deactivateArm();
         Destroy(this.goPistol);
         Destroy(this.goPickaxe);
+		Destroy(this.goGrenadeThrower);
         Destroy(this.arm);
         GameStart.deleteChicken(this.gameObject);
         StartCoroutine("waitSecondsDead");
@@ -300,6 +319,7 @@ public class PlayerController : MonoBehaviour {
 		rotation.setEnabledRotation (false);
 		pistol.setEnabledShoot (false);
 		pickaxe.setEnabledShoot (false);
+		grenadeThrower.setEnabledShoot (false);
 		arm.SetActive (false);
 	}
 	/**
@@ -309,6 +329,7 @@ public class PlayerController : MonoBehaviour {
 		rotation.setEnabledRotation (true);
 		pistol.setEnabledShoot(true);
 		pickaxe.setEnabledShoot (true);
+		grenadeThrower.setEnabledShoot (true);
 		arm.SetActive (true);
 	}
 
