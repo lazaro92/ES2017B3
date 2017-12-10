@@ -33,6 +33,10 @@ public class GameStart : MonoBehaviour
 
 	private Canvas cnvCurrentTeam;
 
+	public Sprite changeBlue;
+	public Sprite changeRed;
+
+	public static GameStart instance;
 
 	// Use this for initialization
 	void Start()
@@ -61,6 +65,11 @@ public class GameStart : MonoBehaviour
 		cnvCurrentTeam = goCurrentTeam.GetComponent<Canvas>();
 
 		lastTeam = currentTeam;
+		// Active icon
+		playerController.activateImage ();
+		// Desactive icon
+		StartCoroutine("waitSecondsDesactivate");
+
 		//Cursor
 		OnMouseEnter();
 	}
@@ -97,6 +106,10 @@ public class GameStart : MonoBehaviour
 			camFollow.setFollower(nextChicken.Value);
 
 			currentChickens[currentTeam] = nextChicken; //set the current chicken as the last chicken who played for this team
+			// Active icon
+			playerController.activateImage ();
+			// Desactive icon
+			StartCoroutine("waitSecondsDesactivate");
 		}
 	}
 
@@ -104,14 +117,14 @@ public class GameStart : MonoBehaviour
     {
 		cnvCurrentTeam.enabled = true;
 
-		Transform temp = cnvCurrentTeam.transform.Find("txtTeam");
-		Text txtTeam = temp.GetComponent<Text>();
+		Transform temp = cnvCurrentTeam.transform.Find("changeTeam");
+		Image changeTeam = temp.GetComponent<Image>();
 
 		if (team == 0) {
-			txtTeam.text = "Blue Team Turn";
+			changeTeam.sprite = changeBlue;
 		}
 		else {
-			txtTeam.text = "Red Team Turn";
+			changeTeam.sprite = changeRed;
 		}
 		Time.timeScale = 0.00001f;
         
@@ -144,10 +157,13 @@ public class GameStart : MonoBehaviour
 		{
 			numTeams--;
 			squads.RemoveAt(team);
-			if (squads.Count <= 1)
+			if (squads.Count <= 1) {
 				SceneManager.LoadScene("FinalScene");
-			if (team < currentTeam)
+			}
+
+			if (team < currentTeam) {
 				currentTeam--;
+			}
 		}
 
 	}
@@ -164,5 +180,10 @@ public class GameStart : MonoBehaviour
 		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 	}
 
-
+	// Funció que retarda la desactivació de l'icona de jugador actual
+	IEnumerator waitSecondsDesactivate(){
+		float newTime =  Globals.TIME_PER_TURN;
+		yield return new WaitForSeconds(newTime-1);
+		playerController.desactivateImage ();
+	}
 }

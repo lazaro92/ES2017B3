@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour {
 	// Asignar la barra de vida al player
 	public Image healthBar;
 
+	private Image iconTurn;
+	private bool active;
+
 	// Use this for initialization
 	void Start () {
 		// Obtenim el component (del player)
@@ -309,4 +312,15 @@ public class PlayerController : MonoBehaviour {
 		arm.SetActive (true);
 	}
 
+	// Activació icona jugador actual
+	public void activateImage () {
+		active = true;
+		this.GetComponentInChildren<Canvas> ().transform.Find("iconTurn").GetComponent<Image>().enabled = active;
+	}
+
+	// Desactivació icona jugador actual
+	public void desactivateImage () {
+		active = false;
+		this.GetComponentInChildren<Canvas> ().transform.Find("iconTurn").GetComponent<Image>().enabled = active;
+	}
 }
