@@ -8,18 +8,18 @@ public class Globals : MonoBehaviour {
 	public static int HEALTH = 100;//change if needed
 	public static int TIME_PER_TURN = 10;
 	//Pistol
-	public const int PISTOL_DAMAGE = 50;
-	public const int PISTOL_AMMO = 10; //If limitedAmmo is true
+	public const int PISTOL_DAMAGE = 25;
+	public const int PISTOL_AMMO = 20; //If limitedAmmo is true
 	public static int SHOTS_PER_TURN = 2;
 
 	
 	//Pickaxe
-	public const int PICKAXE_DAMAGE = 100;
+	public const int PICKAXE_DAMAGE = 50;
 
 	//GrenadeThrower
-	public const int GRENADE_THROW_AMMO = 3; //If limitedAmmo is true
+	public const int GRENADE_THROW_AMMO = 5; //If limitedAmmo is true
 	public static int GRENADE_THROW_PER_TURN = 1;
-	public static float GRENADE_THROW_FORCE = 3f;
+	public static float GRENADE_THROW_FORCE = 3.5f;
 
 	//Grenade
 	public const int GRENADE_DAMAGE = 50;
