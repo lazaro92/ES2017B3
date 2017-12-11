@@ -6,7 +6,7 @@ public class Grenade : MonoBehaviour
 {
 	private int damage = Globals.GRENADE_DAMAGE; //Damage is for the damage of the player that hit it.
 	private float delay = Globals.GRENADE_DELAY; //Seconds when the granade is throw and explode
-	public float radius = Globals.GRENADE_RADIUS;
+	private float radius = Globals.GRENADE_RADIUS;
 	public float force = 5f;
 
 	public Transform explosionEffect;
@@ -31,17 +31,28 @@ public class Grenade : MonoBehaviour
 
 	void Explode()
 	{
-		Debug.Log ("Booom!!");
+		//Debug.Log ("Booom!!");
 		//Show Effect
 		Effect();
 		//Get nearby objects in array
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,radius);
 
 		foreach (Collider2D nearbyCollider2D in colliders) {
-			Debug.Log (nearbyCollider2D.gameObject);
+			//Debug.Log (nearbyCollider2D.gameObject);
 			applyDamage (nearbyCollider2D.gameObject);
 		}
 		//Remove granade
+		gameObject.GetComponent<SpriteRenderer> ().color = new Color (0, 0, 0, 0f);
+		StartCoroutine(WaitAndDestroy(gameObject,0.7f));
+
+
+	}
+
+	private IEnumerator WaitAndDestroy(GameObject gameObject, float time){
+		yield return new WaitForSeconds(time);
+		CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
+		cam.setFollower (cam.getPreviousObject ());
+		cam.setPreviousObject (null);
 		Destroy(gameObject);
 	}
 
@@ -59,7 +70,7 @@ public class Grenade : MonoBehaviour
 		switch(nearbyObject.name)
 		{
 		case "Player(Clone)":
-			Debug.Log ("Player in Granade");
+			//Debug.Log ("Player in Granade");
 			//Move player by the explosion
 //			Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D> ();
 //			if (rb != null) {
@@ -69,12 +80,12 @@ public class Grenade : MonoBehaviour
 			player.decreaseHealth (damage);
 			break;
 		case "block":
-			Debug.Log ("Block in Granade");
+			//Debug.Log ("Block in Granade");
 			Explodable _explo = nearbyObject.GetComponent<Explodable> ();
 			_explo.explode ();
 			break;
 		default:
-			Debug.Log ("Default in Granade: " + gameObject.name);
+			//Debug.Log ("Default in Granade: " + gameObject.name);
 			break;
 		}
 

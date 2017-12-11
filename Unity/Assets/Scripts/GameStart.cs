@@ -29,6 +29,7 @@ public class GameStart : MonoBehaviour
 
 
 	private PlayerController playerController;
+	//Cameras
 	private CameraFollow camFollow;
 
 	private Canvas cnvCurrentTeam;
@@ -186,4 +187,6 @@ public class GameStart : MonoBehaviour
 		yield return new WaitForSeconds(newTime-1);
 		playerController.desactivateImage ();
 	}
+
+
 }

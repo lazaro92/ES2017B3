@@ -44,7 +44,7 @@ public class GrenadeThrower : MonoBehaviour {
 					magazine++;
 
 			} else {
-				Debug.Log ("There are no grenades in magazine or the turn's shots are overrr");
+				//Debug.Log ("There are no grenades in magazine or the turn's shots are overrr");
 				soundManager.PlaySound ("dry"); 
 			}
 		} else {
@@ -62,7 +62,7 @@ public class GrenadeThrower : MonoBehaviour {
 						magazine++;
 
 				} else {
-					Debug.Log("There are no grenades in magazine or the turn's shots are overrr");
+					//Debug.Log("There are no grenades in magazine or the turn's shots are overrr");
 					soundManager.PlaySound("dry"); 
 				}
 			}
@@ -74,7 +74,10 @@ public class GrenadeThrower : MonoBehaviour {
 		//Debug.Log ("Tiro granada desde pistola");
 		Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
 		GameObject grenade = Instantiate (grenadePrefab,firePointPosition,transform.rotation);
+		//Camera
+		//Assign last Gameobject to camera
 		CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
+		cam.setPreviousObject (cam.getFollower ());
 		cam.setFollower (grenade);
 		Rigidbody2D rb = grenade.GetComponent<Rigidbody2D> ();
 		Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
