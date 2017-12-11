@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 	private GameObject goGrenadeThrower;
 	private GrenadeThrower grenadeThrower;
 
+
 	// Canvas HUD i text
 	private Canvas HUD_player;
 	private Text txtMagazine;

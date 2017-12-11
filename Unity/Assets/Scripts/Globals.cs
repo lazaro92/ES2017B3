@@ -24,7 +24,7 @@ public class Globals : MonoBehaviour {
 	//Grenade
 	public const int GRENADE_DAMAGE = 50;
 	public const float GRENADE_DELAY = 2.3f;
-	public const float GRENADE_RADIUS = 5f;
+	public const float GRENADE_RADIUS = 1.3f;
 
 	//STATIC
 	public static int numChickens = 2; //initial chickens to gameplay

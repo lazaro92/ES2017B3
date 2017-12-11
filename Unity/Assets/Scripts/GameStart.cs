@@ -32,6 +32,13 @@ public class GameStart : MonoBehaviour
 	//Cameras
 	private CameraFollow camFollow;
 
+	public Camera mainCamera;
+	public Camera secondCamera;
+
+	//Camera listeners
+	AudioListener mainCameraAudioLis;
+	AudioListener secondCameraAudioLis;
+
 	private Canvas cnvCurrentTeam;
 
 	public Sprite changeBlue;
@@ -42,6 +49,10 @@ public class GameStart : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		//Camera
+		mainCameraAudioLis = mainCamera.GetComponent<AudioListener>();
+		secondCameraAudioLis = secondCamera.GetComponent<AudioListener>();
+
 		numTeams = 2;
 		teamCounter = 0;
 		chickensPerTeam = new int[] { Globals.numChickens, Globals.numChickens };
@@ -60,7 +71,9 @@ public class GameStart : MonoBehaviour
 		playerController = squads[0].First.Value.GetComponent<PlayerController>(); // put the first chicken on play
 		playerController.setMovement(true);
 
-		camFollow = Camera.main.GetComponent<CameraFollow>();
+
+		ShowMainCamera ();
+		camFollow = mainCamera.GetComponent<CameraFollow>();
 
 		GameObject goCurrentTeam = GameObject.Find("TeamTurnInfo");
 		cnvCurrentTeam = goCurrentTeam.GetComponent<Canvas>();
@@ -116,6 +129,7 @@ public class GameStart : MonoBehaviour
 
 	private IEnumerator waitSecondsInformTeam(int team)
     {
+		ShowGeneralView();
 		cnvCurrentTeam.enabled = true;
 
 		Transform temp = cnvCurrentTeam.transform.Find("changeTeam");
@@ -137,6 +151,7 @@ public class GameStart : MonoBehaviour
 
 		Time.timeScale = 1f;
 		cnvCurrentTeam.enabled = false;
+		ShowMainCamera ();
 	}
 
 	public static void deleteChicken(GameObject chicken)
@@ -187,6 +202,22 @@ public class GameStart : MonoBehaviour
 		yield return new WaitForSeconds(newTime-1);
 		playerController.desactivateImage ();
 	}
+		
+	//Cameras
+	private void ShowGeneralView() {
+		mainCamera.enabled = false;
+		mainCameraAudioLis.enabled = false;
 
+		secondCamera.enabled = true;
+		secondCameraAudioLis.enabled = true;
+	}
+
+	private void ShowMainCamera() {
+		mainCamera.enabled = true;
+		mainCameraAudioLis.enabled = true;
+
+		secondCamera.enabled = false;
+		secondCameraAudioLis.enabled = false;
+	}
 
 }

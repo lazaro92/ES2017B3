@@ -9,6 +9,7 @@ public class ArmRotation : MonoBehaviour
     public int rotationOffset = 90;
 
     private bool rotationEnabled = false;
+	private Camera camera;
 
 	// Canviar color del braç
 	private SpriteRenderer spr;
@@ -21,8 +22,9 @@ public class ArmRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rotationEnabled){
-            Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		camera = Camera.current;
+		if (rotationEnabled && transform != null && camera != null){
+			Vector3 difference = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             difference.Normalize();
 
             //Find angle in degrees where arm is pointing.
@@ -55,6 +57,10 @@ public class ArmRotation : MonoBehaviour
 
 	public void resetColor(){
 		spr.color = Color.white;
+	}
+
+	public void setCamera(Camera cam){
+		camera = cam;
 	}
 
 }
