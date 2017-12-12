@@ -46,12 +46,20 @@ public class GameStart : MonoBehaviour
 
 	public static GameStart instance;
 
+	public static Image bar1, bar2;
+
 	// Use this for initialization
 	void Start()
 	{
 		//Camera
 		mainCameraAudioLis = mainCamera.GetComponent<AudioListener>();
 		secondCameraAudioLis = secondCamera.GetComponent<AudioListener>();
+		
+		//Points bars
+		bar1 = GameObject.Find("team1_bar").GetComponent<Image>();
+		bar2 = GameObject.Find("team2_bar").GetComponent<Image>();
+		bar1.fillAmount = 0;
+		bar2.fillAmount = 0;
 
 		numTeams = 2;
 		teamCounter = 0;
@@ -163,11 +171,21 @@ public class GameStart : MonoBehaviour
 			{
 				currentChickens[team] = currentChickens[team].Previous ?? squads[team].Last;
 				squads[team].Remove(chicken);
+
+				
 				Globals.changeTurn = true;
 				break;
 			}
 			else if (squads[team].Remove(chicken))
 				break;
+
+		if (team == 0)
+			bar2.fillAmount += 0.1f;
+		else
+			bar1.fillAmount += 0.1f;
+
+		if (bar2.fillAmount + bar1.fillAmount >= 2)
+			SceneManager.LoadScene("FinalScene");
 
 		if (squads[team].Count == 0)
 		{
