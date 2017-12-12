@@ -33,4 +33,6 @@ public class Globals : MonoBehaviour {
 	public static int accPoints = 0;
 	public static int remainingShots = SHOTS_PER_TURN;
 
+	// Sound
+	public static bool enabledSound = true;
 }

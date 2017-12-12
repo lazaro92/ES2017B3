@@ -20,12 +20,13 @@ public class soundManager : MonoBehaviour {
 		jumpSound = Resources.Load<AudioClip>("Sounds/jump");
 		digSound = Resources.Load<AudioClip>("Sounds/dig");
 		drySound = Resources.Load<AudioClip>("Sounds/dry");
-		enabledSound = true;
+		enabledSound = Globals.enabledSound;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown ("m"))
+			switchSound ();
 	}
 
 	public static void PlaySound(string clip)
