@@ -51,7 +51,10 @@ public class Grenade : MonoBehaviour
 	private IEnumerator WaitAndDestroy(GameObject gameObject, float time){
 		yield return new WaitForSeconds(time);
 		CameraFollow cam = Camera.main.GetComponent<CameraFollow>();
-		cam.setFollower (cam.getPreviousObject ());
+		//Debug.Log (cam.getFollower ().name);
+		if (cam.getFollower ().name == "Grenade(Clone)" ) {
+			cam.setFollower (cam.getPreviousObject ());
+		}
 		cam.setPreviousObject (null);
 		Destroy(gameObject);
 	}
