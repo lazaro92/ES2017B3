@@ -99,13 +99,13 @@ public class GameStart : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		for (var team = 0; team < numTeams; team++)
+		/*for (var team = 0; team < numTeams; team++)
 		{
 			if (Globals.points[team] > Globals.MAX_POINTS)
 			{
 				SceneManager.LoadScene("FinalScene");
 			}
-		}
+		}*/
 		if (Globals.changeTurn) //Code to change turn
 		{
 			Globals.changeTurn = false; // deactivate flag
@@ -166,19 +166,17 @@ public class GameStart : MonoBehaviour
 	{
 		int team;
 
-		for (team = 0; team < numTeams; team++)
+		for (team = 0; team < numTeams; team++) {
 			if (chicken == currentChickens[team].Value)
 			{
 				currentChickens[team] = currentChickens[team].Previous ?? squads[team].Last;
 				squads[team].Remove(chicken);
-
-				
 				Globals.changeTurn = true;
 				break;
 			}
 			else if (squads[team].Remove(chicken))
 				break;
-
+		}
 		if (team == 0)
 			bar2.fillAmount += 0.1f;
 		else
