@@ -45,4 +45,6 @@ public class Globals : MonoBehaviour {
 	public static int remainingShots = SHOTS_PER_TURN;
 	public static int remainingGrenades = GRENADE_THROW_PER_TURN;
 
+	// Sound
+	public static bool enabledSound = true;
 }
