@@ -793,3 +793,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac8a8f3d27176f4982388afcbcd5c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nonSound: {fileID: 21300000, guid: aa81827c6936f7a49ab6e955beac8440, type: 3}
+  yesSound: {fileID: 21300000, guid: 5fa77314475872d4a9e1c393b9bb9b61, type: 3}

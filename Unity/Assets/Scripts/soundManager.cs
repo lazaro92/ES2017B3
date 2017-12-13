@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class soundManager : MonoBehaviour {
 
@@ -9,10 +10,13 @@ public class soundManager : MonoBehaviour {
 	static AudioSource audioSrc;
 	private static bool enabledSound;
 
+	private Image UIImage;
+	public Sprite nonSound;
+	public Sprite yesSound;
+
 	// Use this for initialization
 	void Start () 
 	{
-		Debug.Log ("Inicialitzat el so");
 		audioSrc = GetComponent<AudioSource>();
 
 		damageSound = Resources.Load<AudioClip>("Sounds/damage");
@@ -21,6 +25,8 @@ public class soundManager : MonoBehaviour {
 		digSound = Resources.Load<AudioClip>("Sounds/dig");
 		drySound = Resources.Load<AudioClip>("Sounds/dry");
 		enabledSound = Globals.enabledSound;
+		UIImage = GameObject.Find("sound").GetComponent<Image>();
+		showSprite ();
 	}
 	
 	// Update is called once per frame
@@ -57,6 +63,14 @@ public class soundManager : MonoBehaviour {
 	public void switchSound ()
 	{
 		enabledSound ^= true;
-		Debug.Log ("Canvi de so: " + enabledSound);
+		showSprite ();
+	}
+
+	private void showSprite ()
+	{
+		if (enabledSound)
+			UIImage.sprite = yesSound;
+		else
+			UIImage.sprite = nonSound;
 	}
 }
