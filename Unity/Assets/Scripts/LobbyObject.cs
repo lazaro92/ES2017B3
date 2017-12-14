@@ -52,10 +52,15 @@ public class LobbyObject : MonoBehaviour {
 	 * To set life Chicken into globals variables 
 	 */
 	public void setHealthToGamePlay(string action){
-		int value = Globals.HEALTH;
-		int total = (action.Equals ("plus")) ? Globals.HEALTH + value : Globals.HEALTH - value;
-		Globals.HEALTH = total;
-		healthInputField.text = total.ToString ();
+		if (action.Equals ("plus")){
+			Globals.HEALTH += 100;
+		}  
+		else{
+			if (Globals.HEALTH > 100) {
+				Globals.HEALTH -= 100;
+			}
+		}
+		healthInputField.text = Globals.HEALTH.ToString ();
 	}
 
 	public void setLimitedAmmo(){
