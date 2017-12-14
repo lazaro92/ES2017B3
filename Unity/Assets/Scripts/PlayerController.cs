@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 		// Munició per cada pollo
 		if (pistol.getInfiniteAmmo () != true) {
 			// Mirem la munició
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString () + "\nGrenades: " + grenadeThrower.getMagazine ().ToString();
+			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString () + "-" + grenadeThrower.getMagazine ().ToString();
 			//this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "Bullets: " + pistol.getMagazine ().ToString ();
 		} else {
 			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Ammo: ∞";
