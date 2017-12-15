@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class soundManager : MonoBehaviour {
 
-	public static AudioClip damageSound, shootSound, jumpSound, digSound, drySound;
+	public static AudioClip damageSound, shootSound, jumpSound, digSound, drySound, explosionSound;
 	
 	static AudioSource audioSrc;
 
@@ -23,6 +23,7 @@ public class soundManager : MonoBehaviour {
 		jumpSound = Resources.Load<AudioClip>("Sounds/jump");
 		digSound = Resources.Load<AudioClip>("Sounds/dig");
 		drySound = Resources.Load<AudioClip>("Sounds/dry");
+		explosionSound = Resources.Load<AudioClip>("Sounds/explosion");
 
 		UIImage = GameObject.Find("sound").GetComponent<Image>();
 		showSprite ();
@@ -54,6 +55,9 @@ public class soundManager : MonoBehaviour {
                 break;
 			case "dry":
 				audioSrc.PlayOneShot(drySound);
+				break;
+			case "explosion":
+				audioSrc.PlayOneShot(explosionSound);
 				break;
 		}
 	}

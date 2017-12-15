@@ -34,6 +34,7 @@ public class Grenade : MonoBehaviour
 		//Debug.Log ("Booom!!");
 		//Show Effect
 		Effect();
+		soundManager.PlaySound("explosion");
 		//Get nearby objects in array
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,radius);
 
@@ -44,7 +45,6 @@ public class Grenade : MonoBehaviour
 		//Remove granade
 		gameObject.GetComponent<SpriteRenderer> ().color = new Color (0, 0, 0, 0f);
 		StartCoroutine(WaitAndDestroy(gameObject,0.7f));
-
 
 	}
 

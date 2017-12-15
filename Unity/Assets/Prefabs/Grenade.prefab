@@ -89,10 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf78166518f803447a6180b07e34575a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 3
-  radius: 1.2
   force: 5
-  explosionEffect: {fileID: 4633339035006524, guid: 11e015dbbba79104680f955faea62a62,
+  explosionEffect: {fileID: 4319413481623918, guid: 7df2aa08054953e478fde3da603a03b5,
     type: 2}
 --- !u!212 &212635797273900938
 SpriteRenderer:
