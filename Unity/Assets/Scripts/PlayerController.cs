@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject goGrenadeThrower;
 	private GrenadeThrower grenadeThrower;
 
+	private int heightToDead;
+
 
 	// Canvas HUD i text
 	private Canvas HUD_player;
@@ -81,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 
 		goPickaxe.SetActive(false);
 		goGrenadeThrower.SetActive(false);
+
+		heightToDead = -12;
 
 		if (gameObject.tag == "team1") {
 			teamRed = true;
@@ -155,7 +159,7 @@ public class PlayerController : MonoBehaviour {
 			grenadeThrower.setEnabledShoot (false);
 		}
 
-		if (rb2d.position.y < -8 && !dead){
+		if (rb2d.position.y < heightToDead && !dead){
 			killChicken();
 			soundManager.PlaySound("damage");
 		}
