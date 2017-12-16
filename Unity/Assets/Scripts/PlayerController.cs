@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 
 	private int heightToDead;
 
+	private bool keyboard;
 
 	// Canvas HUD i text
 	private Canvas HUD_player;
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 			teamBlue = true;
 		}
 
+		keyboard = true;
 	}
 
 	// Problemes amb fisiques
@@ -123,7 +125,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Per detectar la tecla per saltar
-		if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown("w")) && movement)
+		if (keyboard && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown("w")) && movement)
 		{
 			// Si tocamos el suelo
 			if (grounded) {
@@ -134,7 +136,7 @@ public class PlayerController : MonoBehaviour {
 				doubleJump = false;
 			}
         }
-		if (movement) {
+		if (movement && keyboard) {
 			if (Input.GetKeyDown(KeyCode.Alpha1)) {
 				goPistol.SetActive(true);
 				goPickaxe.SetActive(false);
@@ -298,10 +300,6 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine("waitSecondsDead");
 	}
 
-	public void selectWeapon(KeyCode key) {
-
-	}
-
 	// Espera 2 segons abans d'eliminar el pollastre
 	IEnumerator waitSecondsDead(){
 		yield return new WaitForSeconds(2f);
@@ -348,5 +346,9 @@ public class PlayerController : MonoBehaviour {
 	public void desactivateImage () {
 		active = false;
 		this.GetComponentInChildren<Canvas> ().transform.Find("iconTurn").GetComponent<Image>().enabled = active;
+	}
+
+	public void enableKeyboard(bool keyboard){
+		this.keyboard = keyboard;
 	}
 }

@@ -114,16 +114,17 @@ public class GameStart : MonoBehaviour
 
 			currentTeam = ++teamCounter % numTeams; //get the current team
 
-			if (lastTeam != currentTeam){
-				lastTeam = currentTeam;
-                StartCoroutine(waitSecondsInformTeam(currentTeam));
-
-            }
 
 			nextChicken = currentChickens[currentTeam].Next ?? squads[currentTeam].First;
 
 			/* Assign the new chicken in play */
 			playerController = nextChicken.Value.GetComponent<PlayerController>();
+			
+			if (lastTeam != currentTeam){
+				lastTeam = currentTeam;
+                StartCoroutine(waitSecondsInformTeam(currentTeam));
+
+            }
 			playerController.setMovement(true);
 			camFollow.setFollower(nextChicken.Value);
 
@@ -149,7 +150,10 @@ public class GameStart : MonoBehaviour
 		else {
 			changeTeam.sprite = changeRed;
 		}
-		Time.timeScale = 0.00001f;
+		playerController.enableKeyboard(false);
+		playerController.setMovement(false);
+		Time.timeScale = 0f;
+
         
 		float pauseEndTime = Time.realtimeSinceStartup + 2;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -158,8 +162,9 @@ public class GameStart : MonoBehaviour
         }
 
 		Time.timeScale = 1f;
+		playerController.enableKeyboard(true);
 		cnvCurrentTeam.enabled = false;
-		ShowMainCamera ();
+		ShowMainCamera();
 	}
 
 	public static void deleteChicken(GameObject chicken)
