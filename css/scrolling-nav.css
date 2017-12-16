@@ -22,3 +22,67 @@ header {
 section {
   padding: 150px 0;
 }
+
+.person > a > img {
+    display: block;
+    margin: 0 auto;
+    width: 128px;
+    border-radius: 50%;
+}
+
+.person > p {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.system > a > img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Sizes */
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+/* Large desktop */
+@media (min-width: 1200px) { 
+  #logo {
+    width: 500px;
+  }
+  .system > a > img {
+    width: 200px;  
+  }
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+  #logo {
+    width: 400px;
+  }
+  .system > a > img {
+    width: 175px;  
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+  #logo {
+    width: 300px;
+  }
+  .system > a > img {
+    width: 150px;  
+  }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+  #logo {
+    width: 250px;
+  }
+  .system > a > img {
+    width: 100px;  
+  }
+}
