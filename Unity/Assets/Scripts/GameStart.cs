@@ -120,17 +120,17 @@ public class GameStart : MonoBehaviour
 			/* Assign the new chicken in play */
 			playerController = nextChicken.Value.GetComponent<PlayerController>();
 			
+			playerController.setMovement(true);
 			if (lastTeam != currentTeam){
 				lastTeam = currentTeam;
                 StartCoroutine(waitSecondsInformTeam(currentTeam));
-
             }
-			playerController.setMovement(true);
+
 			camFollow.setFollower(nextChicken.Value);
 
 			currentChickens[currentTeam] = nextChicken; //set the current chicken as the last chicken who played for this team
 			// Active icon
-			playerController.activateImage ();
+			playerController.activateImage();
 			// Desactive icon
 			StartCoroutine("waitSecondsDesactivate");
 		}
@@ -163,7 +163,8 @@ public class GameStart : MonoBehaviour
 
 		Time.timeScale = 1f;
 		playerController.enableKeyboard(true);
-		cnvCurrentTeam.enabled = false;
+        playerController.setMovement(true);
+        cnvCurrentTeam.enabled = false;
 		ShowMainCamera();
 	}
 
