@@ -44,7 +44,18 @@ section {
   margin-left: 40px;
 }
 
-/* Sizes */
+figure.screen > figcaption {
+  text-align: center;
+}
+
+figure.screen > a > img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ****************************
+  Sizes
+*******************************/
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */
@@ -59,6 +70,13 @@ section {
   .system > a > img {
     width: 200px;  
   }
+  figure.screen > a > img {
+    width: 300px;
+  }
+  iframe.youtube {
+    width: 420px;
+    height: 315px;
+  }
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -68,6 +86,13 @@ section {
   }
   .system > a > img {
     width: 175px;  
+  }
+  figure.screen > a > img {
+    width: 300px;
+  }
+  iframe.youtube {
+    width: 420px;
+    height: 315px;
   }
 }
 
@@ -79,6 +104,13 @@ section {
   .system > a > img {
     width: 150px;  
   }
+  figure.screen > a > img {
+    width: 300px;
+  }
+  iframe.youtube {
+    width: 300px;
+    height: 225px;
+  }
 }
 
 /* Landscape phones and down */
@@ -88,5 +120,12 @@ section {
   }
   .system > a > img {
     width: 100px;  
+  }
+  figure.screen > a > img {
+    width: 280px;
+  }
+  iframe.youtube {
+    width: 280px;
+    height: 210px;
   }
 }
