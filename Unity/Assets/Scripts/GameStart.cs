@@ -8,6 +8,8 @@ public class GameStart : MonoBehaviour
 {
 	// player Prefab from inspector
 	public GameObject player;
+    // flag Prefab from inspector
+    public GameObject flag;
 	// array of chickens in every team
 
 	// current chicken to move (index of chickens)
@@ -47,6 +49,8 @@ public class GameStart : MonoBehaviour
 	public static GameStart instance;
 
 	public static Image bar1, bar2;
+
+	private int turnsToFlagSpawn;
 
 	// Use this for initialization
 	void Start()
@@ -94,6 +98,7 @@ public class GameStart : MonoBehaviour
 
 		//Cursor
 		OnMouseEnter();
+		turnsToFlagSpawn = Random.Range(2, 5);
 	}
 
 	// Update is called once per frame
@@ -119,6 +124,7 @@ public class GameStart : MonoBehaviour
 
 			/* Assign the new chicken in play */
 			playerController = nextChicken.Value.GetComponent<PlayerController>();
+
 			
 			playerController.setMovement(true);
 			if (lastTeam != currentTeam){
@@ -133,6 +139,14 @@ public class GameStart : MonoBehaviour
 			playerController.activateImage();
 			// Desactive icon
 			StartCoroutine("waitSecondsDesactivate");
+
+            // Flag
+            turnsToFlagSpawn -= 1;
+			if (turnsToFlagSpawn <= 0) {
+				soundManager.PlaySound("flag");
+				Instantiate(flag, new Vector3(Random.Range(-1,45), 15f, 0), Quaternion.identity);
+				turnsToFlagSpawn = Random.Range(2, 5);
+			}	
 		}
 	}
 
@@ -184,9 +198,9 @@ public class GameStart : MonoBehaviour
 				break;
 		}
 		if (team == 0)
-			bar2.fillAmount += 0.1f;
-		else
 			bar1.fillAmount += 0.1f;
+		else
+			bar2.fillAmount += 0.1f;
 
 		if (bar2.fillAmount + bar1.fillAmount >= 2)
 			SceneManager.LoadScene("FinalScene");
@@ -203,7 +217,6 @@ public class GameStart : MonoBehaviour
 				currentTeam--;
 			}
 		}
-
 	}
 
 	public static float pointProportion(int team)
@@ -240,6 +253,17 @@ public class GameStart : MonoBehaviour
 
 		secondCamera.enabled = false;
 		secondCameraAudioLis.enabled = false;
+	}
+
+	public static void setFlagPoints()
+	{
+		if (currentTeam == 0)
+            bar2.fillAmount += 0.3f;
+        else
+            bar1.fillAmount += 0.3f;
+
+        if (bar2.fillAmount + bar1.fillAmount >= 2)
+            SceneManager.LoadScene("FinalScene");
 	}
 
 }

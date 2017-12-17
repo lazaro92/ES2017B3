@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+
+	public int flags;
 	// La força en el personatge horitzontalment perque es mogui
 	public float speed = 2f;
 	// La maxim velocitat del personatge
@@ -94,6 +96,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		keyboard = true;
+		flags = 0;
 	}
 
 	// Problemes amb fisiques
@@ -351,4 +354,15 @@ public class PlayerController : MonoBehaviour {
 	public void enableKeyboard(bool keyboard){
 		this.keyboard = keyboard;
 	}
+
+    //Flag collision
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "flag")
+        {
+            collision.gameObject.SetActive(false);
+            this.flags++;
+			GameStart.setFlagPoints();
+        }
+    }
 }
