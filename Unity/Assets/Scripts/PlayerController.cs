@@ -104,10 +104,13 @@ public class PlayerController : MonoBehaviour {
 		// Munició per cada pollo
 		if (pistol.getInfiniteAmmo () != true) {
 			// Mirem la munició
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString () + "-" + grenadeThrower.getMagazine ().ToString();
-			//this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "Bullets: " + pistol.getMagazine ().ToString ();
+			//this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString () + "-" + grenadeThrower.getMagazine ().ToString();
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = pistol.getMagazine ().ToString ();
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazineGrenade").GetComponent<Text>().text = grenadeThrower.getMagazine ().ToString();
 		} else {
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Ammo: ∞";
+			//this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Ammo: ∞";
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "∞";
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazineGrenade").GetComponent<Text>().text = "∞";
 		}
 		// HUD_player
 		HUD_player = this.GetComponentInChildren<Canvas>();
@@ -278,6 +281,10 @@ public class PlayerController : MonoBehaviour {
 		Globals.accPoints += health;
 
 		if (this.health > health) {
+			// Mostra el dany rebut
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().text = "-"+health.ToString();
+			activateInfoDamage ();
+			StartCoroutine("waitSecondsInfoDamage");
 			this.health -= health;
 			Color color = new Color (236/255f, 137/255f, 137/255f);
 			spr.color = color;
@@ -285,6 +292,11 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine("waitSecondsHealth");
 			healthBar.fillAmount = this.health / Globals.HEALTH; // Restem la barra de vida
 		} else {
+			// Mostra el dany rebut
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().text = "-"+health.ToString();
+			activateInfoDamage ();
+			StartCoroutine("waitSecondsInfoDamage");
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().text = "-"+health.ToString();
 			this.health = 0;
 			healthBar.fillAmount = this.health / Globals.HEALTH; // Restema la barra de vida
 			killChicken();
@@ -353,6 +365,24 @@ public class PlayerController : MonoBehaviour {
 
 	public void enableKeyboard(bool keyboard){
 		this.keyboard = keyboard;
+	}
+
+	// Activació info damage
+	public void activateInfoDamage () {
+		active = true;
+		this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().enabled = active;
+	}
+
+	// Desactivació info damage
+	public void desactivateInfoDamage () {
+		active = false;
+		this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().enabled = active;
+	}
+
+	// Espera 1 segons
+	IEnumerator waitSecondsInfoDamage(){
+		yield return new WaitForSeconds(0.7f);
+		desactivateInfoDamage ();
 	}
 
     //Flag collision
