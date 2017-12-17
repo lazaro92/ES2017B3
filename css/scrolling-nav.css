@@ -40,6 +40,10 @@ section {
   margin: 0 auto;
 }
 
+.requisites > ul {
+  margin-left: 40px;
+}
+
 /* Sizes */
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
