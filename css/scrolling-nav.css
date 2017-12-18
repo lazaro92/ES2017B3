@@ -35,13 +35,9 @@ section {
   text-align: center;
 }
 
-.system > a > img {
+.system > img {
   display: block;
   margin: 0 auto;
-}
-
-.requisites > ul {
-  margin-left: 40px;
 }
 
 figure.screen > figcaption {
@@ -51,6 +47,31 @@ figure.screen > figcaption {
 figure.screen > a > img {
   display: block;
   margin: 0 auto;
+}
+
+.download > a {
+  text-decoration: none;
+}
+
+.button {
+  color: #000;
+  padding:4px;
+  text-align: center;
+  background-color: #EE9747;
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6%;
+  border: 0;
+}
+
+.button:hover {
+  background-color: #F7831E;
+}
+
+.button:active {
+  background-color: #af4f00;
+  text-decoration: none;
 }
 
 /* ****************************
@@ -67,14 +88,14 @@ figure.screen > a > img {
   #logo {
     width: 500px;
   }
-  .system > a > img {
+  .system > img {
     width: 200px;  
   }
   figure.screen > a > img {
     width: 300px;
   }
   iframe.youtube {
-    width: 420px;
+    width: 560px;
     height: 315px;
   }
 }
@@ -84,14 +105,14 @@ figure.screen > a > img {
   #logo {
     width: 400px;
   }
-  .system > a > img {
+  .system > img {
     width: 175px;  
   }
   figure.screen > a > img {
     width: 300px;
   }
   iframe.youtube {
-    width: 420px;
+    width: 560px;
     height: 315px;
   }
 }
@@ -101,14 +122,14 @@ figure.screen > a > img {
   #logo {
     width: 300px;
   }
-  .system > a > img {
+  .system > img {
     width: 150px;  
   }
   figure.screen > a > img {
     width: 300px;
   }
   iframe.youtube {
-    width: 300px;
+    width: 400px;
     height: 225px;
   }
 }
@@ -118,7 +139,7 @@ figure.screen > a > img {
   #logo {
     width: 250px;
   }
-  .system > a > img {
+  .system > img {
     width: 100px;  
   }
   figure.screen > a > img {
@@ -126,6 +147,6 @@ figure.screen > a > img {
   }
   iframe.youtube {
     width: 280px;
-    height: 210px;
+    height: 158px;
   }
 }
