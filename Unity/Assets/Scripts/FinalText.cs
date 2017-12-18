@@ -4,25 +4,65 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class FinalText : MonoBehaviour {
-
-	//We'll need the text fields 
-
-	Text TextPoints1, TextPoints2, TextDeath1, TextDeath2, TextFlags1, TextFlags2;
+public class FinalText : MonoBehaviour
+{
+	public static Text TextPoints1, TextPoints2, TextFlags1, TextFlags2, TextDeath1, TextDeath2;
 	
+	/*private void Awake()
+	{
+		DontDestroyOnLoad(GameObject.Find("TextPersistance"));
+	}*/
 
-	// Use this for initialization
-	void Start () {
-		TextPoints1 = GameObject.Find("TextPoints1").GetComponent<Text>();
-		TextPoints2 = GameObject.Find("TextPoints2").GetComponent<Text>();
-		TextDeath1 = GameObject.Find("TextDeath1").GetComponent<Text>();
-		TextDeath2 = GameObject.Find("TextDeath2").GetComponent<Text>();
-		TextFlags1 = GameObject.Find("TextFlags1").GetComponent<Text>();
-		TextFlags2 = GameObject.Find("TextFlags2").GetComponent<Text>();
+	public static void updatePoints(int team, int increment)
+	{
+
+		if (team == 0)
+		{
+			Globals.Points1 += increment;
+			/*TextPoints1 = GameObject.Find("Points1").GetComponent<Text>();
+			TextPoints1.text = (int.Parse(TextPoints1.text) + increment).ToString();*/
+		}
+		else
+		{
+			Globals.Points2 += increment;
+			/*TextPoints2 = GameObject.Find("Points2").GetComponent<Text>();
+			TextPoints2.text = (int.Parse(TextPoints2.text) + increment).ToString();*/
+		}
+	}
+
+	public static void updateFlags(int team, int increment)
+	{
+
+		if (team == 0)
+		{
+			Globals.Flags1 += increment;
+			/*TextFlags1 = GameObject.Find("Flags1").GetComponent<Text>();
+			TextFlags1.text = (int.Parse(TextFlags1.text) + increment).ToString();*/
+		}
+		else
+		{
+			Globals.Flags2 += increment;
+			/*TextFlags2 = GameObject.Find("Flags2").GetComponent<Text>();
+			TextFlags2.text = (int.Parse(TextFlags2.text) + increment).ToString();*/
+		}
+	}
+
+	public static void updateDeaths(int team, int increment)
+	{
+		if (team == 0)
+		{
+			Globals.Death1 += increment;
+			/*TextDeath1 = GameObject.Find("Death1").GetComponent<Text>();
+			TextDeath1.text = (int.Parse(TextDeath1.text) + increment).ToString();*/
+
+		}
+		else
+		{
+			Globals.Death2 += increment;
+			/*TextDeath2 = GameObject.Find("Death2").GetComponent<Text>();
+			TextDeath2.text = (int.Parse(TextDeath2.text) + increment).ToString();*/
+
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

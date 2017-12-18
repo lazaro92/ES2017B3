@@ -72,7 +72,6 @@ public class GameStart : MonoBehaviour
 		squads = new List<LinkedList<GameObject>>();
 		for (var team = 0; team < numTeams; team++)
 		{ // for every team
-			Globals.points.Add(0);
 			squads.Add(new LinkedList<GameObject>());
 			player.gameObject.tag = "team" + team;
 			for (var i = 0; i < chickensPerTeam[team]; i++) // add the amount of chickens necessary
@@ -197,13 +196,9 @@ public class GameStart : MonoBehaviour
 			else if (squads[team].Remove(chicken))
 				break;
 		}
-		if (team == 0)
-			bar1.fillAmount += 0.1f;
-		else
-			bar2.fillAmount += 0.1f;
 
-		if (bar2.fillAmount + bar1.fillAmount >= 2)
-			SceneManager.LoadScene("FinalScene");
+		Globals.updatePoints(team, 0.1f);
+		FinalText.updateDeaths(team, 1);
 
 		if (squads[team].Count == 0)
 		{
@@ -218,13 +213,6 @@ public class GameStart : MonoBehaviour
 			}
 		}
 	}
-
-	public static float pointProportion(int team)
-	{
-		float proportion = (float) Globals.points[team] / Globals.MAX_POINTS;
-		return proportion;
-	}
-
 	// Change cursor
 	void OnMouseEnter()
 	{
@@ -257,13 +245,7 @@ public class GameStart : MonoBehaviour
 
 	public static void setFlagPoints()
 	{
-		if (currentTeam == 0)
-            bar2.fillAmount += 0.3f;
-        else
-            bar1.fillAmount += 0.3f;
-
-        if (bar2.fillAmount + bar1.fillAmount >= 2)
-            SceneManager.LoadScene("FinalScene");
+		Globals.updatePoints(currentTeam, 0.3f);
 	}
 
 }

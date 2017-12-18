@@ -278,7 +278,6 @@ public class PlayerController : MonoBehaviour {
  +	* Decrease health of the player
  +	*/
 	public void decreaseHealth(int health){
-		Globals.accPoints += health;
 
 		if (this.health > health) {
 			// Mostra el dany rebut

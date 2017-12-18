@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Globals : MonoBehaviour {
+
+	//FINAL STATS
+	public static int Points1, Points2, Flags1, Flags2, Death1, Death2;
+
 
 	//CONSTANTS
 	public static int HEALTH = 100;//change if needed
@@ -35,16 +40,25 @@ public class Globals : MonoBehaviour {
 
 	//POINTS
 
-	public static List<int> points = new List<int>();
+	public static void updatePoints(int team, float points)
+	{
+		GameStart.bar1.fillAmount += (team == 0) ? points : 0f;
+		GameStart.bar2.fillAmount += (team == 1) ? points : 0f;
+
+		FinalText.updatePoints(team, (int)points * 100);
+
+		if (GameStart.bar2.fillAmount >= 1|| GameStart.bar1.fillAmount >= 1)
+			SceneManager.LoadScene("FinalScene");
+	}
 
 
 	//TURN CONTROL
 	public static bool changeTurn = false;
 	public static bool skipTurn = false;
-	public static int accPoints = 0;
 	public static int remainingShots = SHOTS_PER_TURN;
 	public static int remainingGrenades = GRENADE_THROW_PER_TURN;
 
 	// Sound
 	public static bool enabledSound = true;
+
 }
