@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Globals : MonoBehaviour {
 
 	//FINAL STATS
-	public static int Points1, Points2, Flags1, Flags2, Death1, Death2;
+	public static int Points1 = 0, Points2 = 0, Flags1 = 0, Flags2 = 0, Death1 = 0, Death2 = 0;
 
 
 	//CONSTANTS
@@ -19,7 +19,7 @@ public class Globals : MonoBehaviour {
 
 	
 	//Pickaxe
-	public const int PICKAXE_DAMAGE = 50;
+	public const int PICKAXE_DAMAGE = 10;
 
 	//GrenadeThrower
 	public const int GRENADE_THROW_AMMO = 5; //If limitedAmmo is true

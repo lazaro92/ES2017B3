@@ -33,4 +33,9 @@ public class MenuObject : MonoBehaviour {
 		Cursor.SetCursor(null, Vector2.zero, cursorMode);
 	}
 
+	private void Awake()
+	{
+		GameObject g = GameObject.Find("TextPersistance");
+		DontDestroyOnLoad(g);
+	}
 }

@@ -10,7 +10,17 @@ public class GameStart : MonoBehaviour
 	public GameObject player;
     // flag Prefab from inspector
     public GameObject flag;
-	// array of chickens in every team
+	// positions for chickens in every team
+	Vector3[] positionsTeam1 = { new Vector3(17f,-8f,0f), new Vector3(3f,-2f,0f),
+		new Vector3(-1f,9f,0f),new Vector3(9f,-2f,0f),new Vector3(-6f,-8f,0f),
+		new Vector3(-4f,-8f,0f),new Vector3(-8f,-2f,0f),new Vector3(-16f,-2f,0f),
+		new Vector3(-10f,-2f,0f),new Vector3(-10f,-2f,0f)
+	};
+	Vector3[] positionsTeam2 = { new Vector3(6.75f,1f,0f), new Vector3(20f,-2f,0f),
+		new Vector3(1f,-5f,0f),new Vector3(-15f,2f,0f),new Vector3(23f,3.33f,0f),
+		new Vector3(42f,-2f,0f),new Vector3(42f,-2f,0f),new Vector3(42f,-2f,0f),
+		new Vector3(42f,-2f,0f),new Vector3(42f,-2f,0f)
+	};
 
 	// current chicken to move (index of chickens)
 	private int teamCounter;
@@ -65,6 +75,14 @@ public class GameStart : MonoBehaviour
 		bar1.fillAmount = 0;
 		bar2.fillAmount = 0;
 
+		//Flag creation
+		
+		for(var f = 0; f < Globals.numFlags; f++)
+		{
+			Instantiate(flag, new Vector3(Random.Range(-1, 45), 15f, 0), Quaternion.identity);
+		}
+
+
 		numTeams = 2;
 		teamCounter = 0;
 		chickensPerTeam = new int[] { Globals.numChickens, Globals.numChickens };
@@ -75,7 +93,7 @@ public class GameStart : MonoBehaviour
 			squads.Add(new LinkedList<GameObject>());
 			player.gameObject.tag = "team" + team;
 			for (var i = 0; i < chickensPerTeam[team]; i++) // add the amount of chickens necessary
-				squads[team].AddFirst((GameObject)Instantiate(player, new Vector3( (team == 0)? -7.82f +i : 11 + i , -1.0f, 0), Quaternion.identity));
+				squads[team].AddFirst((GameObject)Instantiate(player, (team == 0)? positionsTeam1[i]: positionsTeam2[i], Quaternion.identity));
 
 			currentChickens[team] = squads[team].First;
 		}
@@ -245,7 +263,7 @@ public class GameStart : MonoBehaviour
 
 	public static void setFlagPoints()
 	{
-		Globals.updatePoints(currentTeam, 0.3f);
+		
 	}
 
 }
