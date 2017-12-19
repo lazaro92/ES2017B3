@@ -116,32 +116,27 @@
               <div class="row">
                 <div class="col-md-6">
                   <figure class="screen">
-                  <a class="grouped_elements" rel="group1" href="img/menu.png.jpg"><img src="img/menu.png" alt=""/></a> 
+                  <a class="fancybox" rel="group1" href="img/menu.png"><img src="img/menu.png" alt=""/></a> 
                     <figcaption>Home / Menu Screen</figcaption>
                   </figure>
                 </div>
                 <div class="col-md-6">
                   <figure class="screen">
-                    <a href="img/lobby.png" target="_blank">
-                      <img src="img/lobby.png" class="img-responsive">
-                    </a>
+                  <a class="fancybox" rel="group1" href="img/lobby.png"><img src="img/lobby.png" alt=""/></a> 
                     <figcaption>Lobby Screen</figcaption>
                   </figure>
                 </div>
    
                 <div class="col-md-6">
                   <figure class="screen">
-                    <a href="img/battle.png" target="_blank">
-                      <img src="img/battle.png" class="img-responsive">
-                    </a>
+                  <a class="fancybox" rel="group1" href="img/battle.png"><img src="img/battle.png" alt=""/></a> 
                     <figcaption>Battle Game Screen</figcaption>
                   </figure>
                 </div>
                 <div class="col-md-6">
                   <figure class="screen">
-                    <a href="img/statistics.png" target="_blank">
-                      <img src="img/statistics.png" class="img-responsive">
-                    </a>
+                  <a class="fancybox" rel="group1" href="img/statistics.png"><img src="img/statistics.png" alt=""/></a>
+                    
                     <figcaption>Game Statistics Screen</figcaption>
                   </figure>
               </div>
@@ -318,10 +313,15 @@
 
 
 	<script type="text/javascript" src="js/jquery.mousewheel-3.0.4.pack.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
-	<link rel="stylesheet" type="text/css" href="js/jquery.fancybox-1.3.4.css" media="screen" />
+	<script type="text/javascript" src="js/jquery.fancybox-1.3.4.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-1.3.4.css" media="screen" />
 	<script type="text/javascript">
-		$("a").fancybox();
+$(document).ready(function() {
+		$(".fancybox").fancybox({
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+	});
 	</script>
   </body>
 
