@@ -54,10 +54,10 @@ figure.screen > a > img {
 }
 
 .button {
-  color: #000;
+  color: white;
   padding:4px;
   text-align: center;
-  background-color: #EE9747;
+  background-color:black;
   width: 100px;
   display: block;
   margin: 0 auto;
@@ -66,11 +66,11 @@ figure.screen > a > img {
 }
 
 .button:hover {
-  background-color: #F7831E;
+  background-color: black;
 }
 
 .button:active {
-  background-color: #af4f00;
+  background-color: black;
   text-decoration: none;
 }
 
@@ -150,3 +150,28 @@ figure.screen > a > img {
     height: 158px;
   }
 }
+
+#about{
+  /*background-image: url("../img/background_zero.png");
+  background-position: center;*/
+  background-color: #866D37;
+  color:white; 
+}
+
+#videos{
+  background-color: #A38144 !important;
+  color:white; 
+}
+
+#screens{
+  background-color: #A38144 !important;
+  color:white; 
+}
+
+#team, #download, #contact{
+  background-image: url("../img/background_zero.png");
+  background-color: #563000;
+  background-position: center;
+  color:white; 
+}
+
