@@ -40,16 +40,29 @@ public class Globals : MonoBehaviour {
 
 	//POINTS
 
-	public static void updatePoints(int team, float points)
+	public static void updatePoints(string tag, float points)
 	{
-		GameStart.bar1.fillAmount += (team == 0) ? points : 0f;
-		GameStart.bar2.fillAmount += (team == 1) ? points : 0f;
+		int team;
+		if (tag=="team0"){
+			team = 1;
+		}
+		else{
+			team = 0;
+		}
 
-		FinalText.updatePoints(team, (int)points * 100);
-
-		if (GameStart.bar2.fillAmount >= 1|| GameStart.bar1.fillAmount >= 1)
-			SceneManager.LoadScene("FinalScene");
+		updatePoints(team, points);
 	}
+
+	public static void updatePoints(int team, float points)
+    {
+        GameStart.bar1.fillAmount += (team == 0) ? points : 0f;
+        GameStart.bar2.fillAmount += (team == 1) ? points : 0f;
+
+        FinalText.updatePoints(team, (int)points * 100);
+
+        if (GameStart.bar2.fillAmount >= 1 || GameStart.bar1.fillAmount >= 1)
+            SceneManager.LoadScene("FinalScene");
+    }
 
 
 	//TURN CONTROL
