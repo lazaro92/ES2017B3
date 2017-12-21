@@ -18,8 +18,8 @@ public class GameStart : MonoBehaviour
 	};
 	Vector3[] positionsTeam2 = { new Vector3(6.75f,1f,0f), new Vector3(20f,-2f,0f),
 		new Vector3(1f,-5f,0f),new Vector3(-15f,2f,0f),new Vector3(23f,3.33f,0f),
-		new Vector3(42f,-2f,0f),new Vector3(42f,-2f,0f),new Vector3(42f,-2f,0f),
-		new Vector3(42f,-2f,0f),new Vector3(42f,-2f,0f)
+		new Vector3(-23f,-8f,0f),new Vector3(-17f,-8f,0f),new Vector3(21f,6f,0f),
+		new Vector3(17f,4f,0f),new Vector3(1f,2f,0f)
 	};
 
 	// current chicken to move (index of chickens)
