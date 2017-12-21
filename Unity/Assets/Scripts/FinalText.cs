@@ -18,9 +18,9 @@ public class FinalText : MonoBehaviour
 		Text TextWinner = GameObject.Find("TextWinner").GetComponent<Text>();
 
 		if (TextPoints1 != null)
-			TextPoints1.text = (GameStart.bar1.fillAmount * 100).ToString();
+			TextPoints1.text = Mathf.Round(GameStart.bar1.fillAmount * 100).ToString();
 		if (TextPoints2 != null)
-			TextPoints2.text = (GameStart.bar2.fillAmount * 100).ToString();
+			TextPoints2.text = Mathf.Round(GameStart.bar2.fillAmount * 100).ToString();
 
 		if (TextFlags1 != null)
 			TextFlags1.text = Globals.Flags1.ToString();
