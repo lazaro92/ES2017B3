@@ -391,7 +391,7 @@ public class PlayerController : MonoBehaviour {
         {
             collision.gameObject.SetActive(false);
             this.flags++;
-			Globals.updatePoints(GameStart.currentTeam == 0 ? 1 : 0, 0.3f);
+			Globals.updatePoints(gameObject.tag, 0.3f);
 			FinalText.updateFlags(GameStart.currentTeam, 1);
 		}
     }
