@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Pause : MonoBehaviour {
@@ -21,4 +22,9 @@ public class Pause : MonoBehaviour {
 			Time.timeScale = (active) ? 0 : 1f; // Bloquegem el joc si és 0 tot bloquejat sino 1 desbloqueig
 		}
 	}
+
+	public void onExit(){
+		Time.timeScale = 1f;
+        SceneManager.LoadScene("FinalScene");
+    }
 }

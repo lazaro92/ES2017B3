@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour {
 	// Gestió de la velocitat
 	private Vector2 velocity;
 
+	private GameObject previousObject;
 	// Use this for initialization
 	void Start () {
         follow = GameStart.squads[0].First.Value;
@@ -35,5 +36,17 @@ public class CameraFollow : MonoBehaviour {
 	
 	public void setFollower(GameObject c){
         follow = c;
+	}
+
+	public GameObject getFollower(){
+		return follow;
+	}
+
+	public void setPreviousObject(GameObject c){
+		previousObject = c;
+	}
+
+	public GameObject getPreviousObject(){
+		return previousObject;
 	}
 }

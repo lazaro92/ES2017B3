@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+
+	public int flags;
 	// La força en el personatge horitzontalment perque es mogui
 	public float speed = 2f;
 	// La maxim velocitat del personatge
@@ -38,12 +40,18 @@ public class PlayerController : MonoBehaviour {
 	private GameObject arm;//Persistent
 	private ArmRotation rotation;
 
-	//TODO Albert
 	private GameObject goPistol;
 	private Pistol pistol;
 
 	private GameObject goPickaxe;
 	private Pickaxe pickaxe;
+
+	private GameObject goGrenadeThrower;
+	private GrenadeThrower grenadeThrower;
+
+	private int heightToDead;
+
+	private bool keyboard;
 
 	// Canvas HUD i text
 	private Canvas HUD_player;
@@ -52,6 +60,9 @@ public class PlayerController : MonoBehaviour {
 	[Header("Unity Stuff")]
 	// Asignar la barra de vida al player
 	public Image healthBar;
+
+	private Image iconTurn;
+	private bool active;
 
 	// Use this for initialization
 	void Start () {
@@ -67,10 +78,16 @@ public class PlayerController : MonoBehaviour {
 		goPistol = transform.Find ("Arm/Pistol").gameObject;
 		pistol = goPistol.GetComponent<Pistol>();
 
-		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+		goPickaxe = transform.Find ("Arm/Pickaxe").gameObject;
 		pickaxe = goPickaxe.GetComponent<Pickaxe>();
 
+		goGrenadeThrower = transform.Find ("Arm/GrenadeThrower").gameObject;
+		grenadeThrower = goGrenadeThrower.GetComponent<GrenadeThrower>();
+
 		goPickaxe.SetActive(false);
+		goGrenadeThrower.SetActive(false);
+
+		heightToDead = -12;
 
 		if (gameObject.tag == "team1") {
 			teamRed = true;
@@ -78,6 +95,8 @@ public class PlayerController : MonoBehaviour {
 			teamBlue = true;
 		}
 
+		keyboard = true;
+		flags = 0;
 	}
 
 	// Problemes amb fisiques
@@ -85,10 +104,13 @@ public class PlayerController : MonoBehaviour {
 		// Munició per cada pollo
 		if (pistol.getInfiniteAmmo () != true) {
 			// Mirem la munició
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString ();
-			//this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "Bullets: " + pistol.getMagazine ().ToString ();
+			//this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: " + pistol.getMagazine ().ToString () + "-" + grenadeThrower.getMagazine ().ToString();
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = pistol.getMagazine ().ToString ();
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazineGrenade").GetComponent<Text>().text = grenadeThrower.getMagazine ().ToString();
 		} else {
-			this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Bullets: ∞";
+			//this.GetComponentInChildren<Canvas> ().GetComponentInChildren<Text> ().text = "Ammo: ∞";
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazine").GetComponent<Text>().text = "∞";
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtMagazineGrenade").GetComponent<Text>().text = "∞";
 		}
 		// HUD_player
 		HUD_player = this.GetComponentInChildren<Canvas>();
@@ -109,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// Per detectar la tecla per saltar
-		if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown("w")) && movement)
+		if (keyboard && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown("w")) && movement)
 		{
 			// Si tocamos el suelo
 			if (grounded) {
@@ -120,24 +142,32 @@ public class PlayerController : MonoBehaviour {
 				doubleJump = false;
 			}
         }
-		if (movement) {
+		if (movement && keyboard) {
 			if (Input.GetKeyDown(KeyCode.Alpha1)) {
 				goPistol.SetActive(true);
 				goPickaxe.SetActive(false);
+				goGrenadeThrower.SetActive(false);
 			}
 			else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+				goGrenadeThrower.SetActive(true);
+				goPickaxe.SetActive(false);
+				goPistol.SetActive(false);
+			}
+			else if (Input.GetKeyDown(KeyCode.Alpha3)) {
 				goPickaxe.SetActive(true);
 				goPistol.SetActive(false);
+				goGrenadeThrower.SetActive(false);
 			}
 		}
 		//Pause
 		if (Input.GetKeyDown ("space")) {
 			rotation.setEnabledRotation (false);
 			pistol.setEnabledShoot(false);
-			pistol.setEnabledShoot (false);
+			pickaxe.setEnabledShoot (false);
+			grenadeThrower.setEnabledShoot (false);
 		}
 
-		if (rb2d.position.y < -8 && !dead){
+		if (rb2d.position.y < heightToDead && !dead){
 			killChicken();
 			soundManager.PlaySound("damage");
 		}
@@ -232,21 +262,28 @@ public class PlayerController : MonoBehaviour {
             goPistol = transform.Find("Arm/Pistol").gameObject;
             pistol = goPistol.GetComponent<Pistol>();
 
-			goPickaxe = transform.Find ("Arm/Pickaxe").gameObject; //TODO: Albert
+			goPickaxe = transform.Find ("Arm/Pickaxe").gameObject;
 			pickaxe = goPickaxe.GetComponent<Pickaxe>();
+
+			goGrenadeThrower = transform.Find ("Arm/GrenadeThrower").gameObject;
+			grenadeThrower = goGrenadeThrower.GetComponent<GrenadeThrower>();
         }
 		this.rotation.setEnabledRotation(movement);
-		this.pistol.setEnabledShoot (movement);//TODO Albert
+		this.pistol.setEnabledShoot (movement);
 		this.pickaxe.setEnabledShoot (movement);
+		this.grenadeThrower.setEnabledShoot (movement);
 	}
 
 	/*
  +	* Decrease health of the player
  +	*/
 	public void decreaseHealth(int health){
-		Globals.accPoints += health;
 
 		if (this.health > health) {
+			// Mostra el dany rebut
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().text = "-"+health.ToString();
+			activateInfoDamage ();
+			StartCoroutine("waitSecondsInfoDamage");
 			this.health -= health;
 			Color color = new Color (236/255f, 137/255f, 137/255f);
 			spr.color = color;
@@ -254,6 +291,11 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine("waitSecondsHealth");
 			healthBar.fillAmount = this.health / Globals.HEALTH; // Restem la barra de vida
 		} else {
+			// Mostra el dany rebut
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().text = "-"+health.ToString();
+			activateInfoDamage ();
+			StartCoroutine("waitSecondsInfoDamage");
+			this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().text = "-"+health.ToString();
 			this.health = 0;
 			healthBar.fillAmount = this.health / Globals.HEALTH; // Restema la barra de vida
 			killChicken();
@@ -266,13 +308,10 @@ public class PlayerController : MonoBehaviour {
         deactivateArm();
         Destroy(this.goPistol);
         Destroy(this.goPickaxe);
+		Destroy(this.goGrenadeThrower);
         Destroy(this.arm);
         GameStart.deleteChicken(this.gameObject);
         StartCoroutine("waitSecondsDead");
-	}
-
-	public void selectWeapon(KeyCode key) {
-
 	}
 
 	// Espera 2 segons abans d'eliminar el pollastre
@@ -297,6 +336,7 @@ public class PlayerController : MonoBehaviour {
 		rotation.setEnabledRotation (false);
 		pistol.setEnabledShoot (false);
 		pickaxe.setEnabledShoot (false);
+		grenadeThrower.setEnabledShoot (false);
 		arm.SetActive (false);
 	}
 	/**
@@ -306,7 +346,53 @@ public class PlayerController : MonoBehaviour {
 		rotation.setEnabledRotation (true);
 		pistol.setEnabledShoot(true);
 		pickaxe.setEnabledShoot (true);
+		grenadeThrower.setEnabledShoot (true);
 		arm.SetActive (true);
 	}
 
+	// Activació icona jugador actual
+	public void activateImage () {
+		active = true;
+		this.GetComponentInChildren<Canvas> ().transform.Find("iconTurn").GetComponent<Image>().enabled = active;
+	}
+
+	// Desactivació icona jugador actual
+	public void desactivateImage () {
+		active = false;
+		this.GetComponentInChildren<Canvas> ().transform.Find("iconTurn").GetComponent<Image>().enabled = active;
+	}
+
+	public void enableKeyboard(bool keyboard){
+		this.keyboard = keyboard;
+	}
+
+	// Activació info damage
+	public void activateInfoDamage () {
+		active = true;
+		this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().enabled = active;
+	}
+
+	// Desactivació info damage
+	public void desactivateInfoDamage () {
+		active = false;
+		this.GetComponentInChildren<Canvas> ().transform.Find("txtDamage").GetComponent<Text>().enabled = active;
+	}
+
+	// Espera 1 segons
+	IEnumerator waitSecondsInfoDamage(){
+		yield return new WaitForSeconds(0.7f);
+		desactivateInfoDamage ();
+	}
+
+    //Flag collision
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "flag")
+        {
+            collision.gameObject.SetActive(false);
+            this.flags++;
+			Globals.updatePoints(gameObject.tag, 0.3f);
+			FinalText.updateFlags(GameStart.currentTeam, 1);
+		}
+    }
 }

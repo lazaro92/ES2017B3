@@ -44,8 +44,8 @@ public class Pickaxe : MonoBehaviour{
 		Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
 		RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, wantToHit);
 		Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.blue);
-		Debug.Log ("Here is the distance: " + hit.distance);
-		Debug.Log ("Here is the DigRange: " + digRange);
+		//Debug.Log ("Here is the distance: " + hit.distance);
+		//Debug.Log ("Here is the DigRange: " + digRange);
 		if (hit.collider != null && hit.distance <= digRange)
 		{
 			if (Time.time >= timeToSpawnEffect){

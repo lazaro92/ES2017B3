@@ -40,7 +40,6 @@ public class Pistol : MonoBehaviour{
 		{
 			if (magazine > 0 && Globals.remainingShots > 0) {
 				Shoot ();
-
 				magazine--;
 				Globals.remainingShots--;
 
@@ -113,4 +112,5 @@ public class Pistol : MonoBehaviour{
 	public bool getInfiniteAmmo(){
 		return infiniteAmmo;
 	}
+
 }
